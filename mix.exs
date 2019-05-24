@@ -21,8 +21,9 @@ defmodule PhoenixCommanded.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:commanded, "~> 0.18"},
+      {:eventstore, "~> 0.16.1", runtime: Mix.env() != :test},
+      {:commanded_eventstore_adapter, "~> 0.5", runtime: Mix.env() != :test},
     ]
   end
 end
