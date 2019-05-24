@@ -1,14 +1,17 @@
 # PhoenixCommanded
 
-Commanded support for Phoenix Apps
+[Commanded][com] support for the [Phoenix Framework][phx]
 
 This repo is to experiment with generators, templates etc. for rapid
 development Phoenix/Commanded apps.
 
-The generators use a file-system layout described in a [google doc][1].  Please
+The generators use a file-system layout described in a [google doc][doc].  Please
 check it out, leave comments and re-use the content.
 
-[1]: https://docs.google.com/document/d/1wks-6lO_MVguOYkETUDRg4tPxHvVgIPCPxObwUHvj14/edit
+[doc]: https://docs.google.com/document/d/1wks-6lO_MVguOYkETUDRg4tPxHvVgIPCPxObwUHvj14/edit
+[com]: https://github.com/commanded/commanded
+[phx]: https://phoenixframework.org
+
 
 ## Installation
 
