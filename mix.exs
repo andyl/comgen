@@ -21,6 +21,7 @@ defmodule PhoenixCommanded.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:jason, "~> 1.1"},
       {:commanded, "~> 0.18"},
       {:eventstore, "~> 0.16.1", runtime: Mix.env() != :test},
       {:commanded_eventstore_adapter, "~> 0.5", runtime: Mix.env() != :test},
