@@ -1,6 +1,7 @@
 defmodule PhoenixCommanded.MixProject do
   use Mix.Project
-
+  use Mix.Config
+  
   def project do
     [
       app: :phoenix_commanded,
@@ -20,11 +21,13 @@ defmodule PhoenixCommanded.MixProject do
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
+    is_configured = Application.get_all_env(:commanded) != []
+    is_using_estore = is_configured && Mix.env() != :test
     [
       {:jason, "~> 1.1"},
-      {:commanded, "~> 0.18"},
-      {:eventstore, "~> 0.16.1", runtime: Mix.env() != :test},
-      {:commanded_eventstore_adapter, "~> 0.5", runtime: Mix.env() != :test},
+      {:commanded, "~> 0.18", runtime: is_configured},
+      {:eventstore, "~> 0.16.1", runtime: is_using_estore},
+      {:commanded_eventstore_adapter, "~> 0.5", runtime: is_using_estore},
     ]
   end
 end

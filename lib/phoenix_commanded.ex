@@ -1,6 +1,6 @@
 defmodule PhoenixCommanded do
   @moduledoc """
-  Documentation for PhoenixCommanded.
+  Code generators and utilities for Phoenix / Commanded.
   """
 
   @doc """

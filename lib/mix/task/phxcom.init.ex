@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Phxcom do
+defmodule Mix.Tasks.Phxcom.Init do
   use Mix.Task
 
   @moduledoc """
@@ -14,8 +14,8 @@ defmodule Mix.Tasks.Phxcom do
 
   """
 
-  @shortdoc "Simply says Phxcom"
+  @shortdoc "Initialize Commanded"
   def run(_) do
-    IO.puts "Phxcom"
+    IO.puts "INIT - Implementation TBD"
   end
 end
