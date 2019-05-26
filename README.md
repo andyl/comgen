@@ -52,7 +52,7 @@ Each generated context will contain a standard set of Commanded elements.
 
 | Element            | Directory    | Module Name           | Alias |
 |--------------------|--------------|-----------------------|-------|
-| API                | /            | MyApp.User            |       |
+| API                | /            | MyApp.User            | User  |
 | Aggregate          | aggregate/   | MyApp.User.Aggregate  | A     |
 | Command            | command/     | MyApp.User.Command    | C     |
 | Command Middleware | com_mw/      | MyApp.User.ComMw      | CM    |
