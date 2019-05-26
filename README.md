@@ -7,12 +7,9 @@ This repo provides generators for rapid creation of Phoenix/Commanded apps.
 The intended audience is new Commanded developers, to generate demo code and to
 get experimental apps up and running quickly.  
 
-Experienced Commanded developers should not rely on these generators, and
-should instead use the Commanded tooling directly.
+Experienced Commanded developers should bypass this scaffolding and use the
+Commanded tooling directly.
 
-The generators use a file-system layout described in this [google doc][doc]. 
-
-[doc]: https://docs.google.com/document/d/1wks-6lO_MVguOYkETUDRg4tPxHvVgIPCPxObwUHvj14/edit
 [com]: https://github.com/commanded/commanded
 [phx]: https://phoenixframework.org
 
@@ -51,12 +48,10 @@ Run `mix phxcmd` to see all generators and generator options.
 
 ## Commanded Elements
 
-|-----------|-----------|----------------------|------|-----------------------------------|
 | Element   | Directory | Module Name          | Abb. | Alias                             |
 |-----------|-----------|----------------------|------|-----------------------------------|
 | Aggregate | aggregate | MyApp.User.Aggregate | A    | alias MyApp.User.Aggregate, as: A |
 | Command   | command   | MyApp.User.Command   | C    | alias MyApp.User.Command, as: C   |
-|-----------|-----------|----------------------|------|-----------------------------------|
 
 ![CommandedCLI](assets/CLI.jpg)
 
