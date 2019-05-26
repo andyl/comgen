@@ -25,6 +25,7 @@ defmodule PhoenixCommanded.MixProject do
     is_using_estore = is_configured && Mix.env() != :test
     [
       {:jason, "~> 1.1"},
+      {:phoenix, "~> 1.4.6"},
       {:commanded, "~> 0.18", runtime: is_configured},
       {:eventstore, "~> 0.16.1", runtime: is_using_estore},
       {:commanded_eventstore_adapter, "~> 0.5", runtime: is_using_estore},
