@@ -2,8 +2,7 @@
 
 [Commanded][com] code generators for the [Phoenix Framework][phx]
 
-This repo provides generators for rapid creation of Phoenix/Commanded apps.  
-
+This repo provides generators for rapid creation of Phoenix/Commanded apps.
 The intended audience is new Commanded developers, to generate demo code and to
 get experimental apps up and running quickly.  
 
@@ -34,10 +33,11 @@ end
 Then run a series of mix commands to configure your app.
 
 ```
+$ cd my_app
 $ mix deps.get
 $ mix phxcmd.add.config
 $ mix phxcmd.add.estore
-$ mix phxcmd.gen.html TBD
+$ mix phxcmd.gen.html User name:string balance:float
 ```
 
 Start your app with `mix phx.server`. Point your browser to `localhost:4000`.
