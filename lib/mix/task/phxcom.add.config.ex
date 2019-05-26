@@ -13,21 +13,16 @@ defmodule Mix.Tasks.Phxcom.Add.Config do
   - Add a line `import_config("commanded.exs")` to your `config/config.exs` file.
 
   ## Examples
-  
+
       mix phxcom.add.config
-
-  ## Note
-
-  Re-running this command will over-write any changes you make to your
-  `config/commended.ex` file.
 
 
   """
 
   @doc false
   def run(_) do
-    if Mix.Project.umbrella? do
-      Mix.raise "mix phx.gen.config can only be run inside an application directory"
+    if Mix.Project.umbrella?() do
+      Mix.raise("mix phx.gen.config can only be run inside an application directory")
     end
 
     write_config_file()
@@ -35,12 +30,30 @@ defmodule Mix.Tasks.Phxcom.Add.Config do
   end
 
   defp write_config_file do
-    filename = :code.priv_dir(:phoenix_commanded) <> "/templates/phxcom.add.config/commanded.exs"
-    text = File.read(filename)
+    {:ok, text} =
+      :code.priv_dir(:phoenix_commanded)
+      |> (&"#{&1}/templates/phxcom.add.config/commanded.exs").()
+      |> File.read()
+
     Generator.create_file("config/commanded.exs", text)
   end
 
   defp add_import_line do
-    IO.puts "#{IO.ANSI.green()}* updating #{IO.ANSI.white()}config/config.exs"
+    import_text = """
+
+    # Import config settings for Commanded
+    import_config("commanded.exs")
+    """
+
+    cfg_file = "config/config.exs"
+    {:ok, text} = File.read(cfg_file)
+
+    unless Regex.match?(~r/commanded.exs/, text) do
+      File.open(cfg_file, [:append], fn file ->
+        IO.puts(file, import_text)
+      end)
+
+      IO.puts("#{IO.ANSI.green()}* updating #{IO.ANSI.white()}config/config.exs")
+    end
   end
 end

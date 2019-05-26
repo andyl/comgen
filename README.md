@@ -49,3 +49,16 @@ Start your app with `mix phx.server`. Point your browser to `localhost:4000`.
 
 Run `mix phxcmd` to see all generators and generator options.
 
+## Commanded Elements
+
+|-----------|-----------|----------------------|------|-----------------------------------|
+| Element   | Directory | Module Name          | Abb. | Alias                             |
+|-----------|-----------|----------------------|------|-----------------------------------|
+| Aggregate | aggregate | MyApp.User.Aggregate | A    | alias MyApp.User.Aggregate, as: A |
+| Command   | command   | MyApp.User.Command   | C    | alias MyApp.User.Command, as: C   |
+|-----------|-----------|----------------------|------|-----------------------------------|
+
+![CommandedCLI](assets/CLI.jpg)
+
+![CommandedElements](assets/CommandedElements.jpg)
+

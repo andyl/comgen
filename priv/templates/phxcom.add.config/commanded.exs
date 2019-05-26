@@ -20,7 +20,7 @@ case Mix.env() do
       types: EventStore.PostgresTypes,
       username: "postgres",
       password: "postgres",
-      database: "estore_proxy",
+      database: "#{Mix.Project.config[:app]}_estore_#{Mix.env()}",
       hostname: "localhost",
       pool_size: 10,
       pool_overflow: 5

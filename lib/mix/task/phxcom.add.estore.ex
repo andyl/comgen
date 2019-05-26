@@ -4,11 +4,19 @@ defmodule Mix.Tasks.Phxcom.Add.Estore do
   @shortdoc "Add Commanded Event Store"
 
   @moduledoc """
-  TBD
+  Add Commanded Event Store
+
+  Runs two mix tasks:
+
+      mix run event_store.create
+      mix run event_store.init
+
+
   """
 
   @doc false
   def run(_) do
-    IO.puts "UNDER CONSTRUCTION"
+    Mix.Tasks.EventStore.Create.run([])
+    Mix.Tasks.EventStore.Init.run([])
   end
 end
