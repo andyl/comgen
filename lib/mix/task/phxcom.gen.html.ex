@@ -1,7 +1,7 @@
-defmodule Mix.Tasks.Phxcom.Add.Estore do
+defmodule Mix.Tasks.Phxcom.Gen.Html do
   use Mix.Task
 
-  @shortdoc "Add Commanded Event Store"
+  @shortdoc "Generate Commanded Context and HTML Pages"
 
   @moduledoc """
   TBD
