@@ -1,7 +1,7 @@
 # PhoenixCommanded
 
 [Commanded][com] code generators for the [Phoenix Framework][phx].  This is 
-UNDER CONSTRUCTION, not yet ready for live use!
+UNDER CONSTRUCTION, not ready for live use!
 
 This repo provides generators for rapid creation of Phoenix/Commanded apps.
 The intended audience is new Commanded developers, to generate demo code and to
@@ -54,25 +54,22 @@ Run `mix phxcmd` to see all generators and generator options.
 
 Each generated context will contain a standard set of Commanded elements.
 
-| Element            | Directory    | Module Name           | Alias |
-|--------------------|--------------|-----------------------|-------|
-| API                | /            | MyApp.User            | User  |
-| Aggregate          | aggregate/   | MyApp.User.Aggregate  | A     |
-| Command            | command/     | MyApp.User.Command    | C     |
-| Command Middleware | com_mw/      | MyApp.User.ComMw      | CM    |
-| Command Handler    | com_hand/    | MyApp.User.ComHand    | CH    |
-| Command Router     | com_router/  | MyApp.User.ComRouter  | CR    |
-| Command Validator  | com_val/     | MyApp.User.ComVal     | CV    |
-| Event              | event/       | MyApp.User.Event      | E     |
-| Event Handler      | ev_hand/     | MyApp.User.EvHand     | EH    |
-| Event Projector    | ev_pro/      | MyApp.User.EvPro      | EP    |
-| Process Manager    | proc_man/    | MyApp.User.ProcMan    | PM    |
-| Read Schema        | read_schema/ | MyApp.User.ReadSchema | RS    |
-| Read Query         | read_query/  | MyApp.User.ReadQuery  | RQ    |
-
-Here's a CLI view...
-
-![CommandedCLI](assets/CLI.jpg)
+| Element            | Directory           | Alias |
+|--------------------|---------------------|-------|
+| API                | /                   | User  |
+| Aggregate          | aggregate/          | A     |
+| Command            | command/            | C     |
+| Command Middleware | command/middleware/ | CM    |
+| Command Handler    | command/handler/    | CH    |
+| Command Router     | command/router/     | CR    |
+| Command Validator  | command/validator/  | CV    |
+| Event              | event/              | E     |
+| Event Handler      | event/handler/      | EH    |
+| Event Projector    | event/projector/    | EP    |
+| Read               | read/               | R     |
+| Read Schema        | read/schema/        | RS    |
+| Read Query         | read/query/         | RQ    |
+| Saga / ProcessMgr  | saga/               | S     |
 
 Here's how the Commanded elements flow together...
 
