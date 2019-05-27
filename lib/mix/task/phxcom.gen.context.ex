@@ -52,16 +52,23 @@ defmodule Mix.Tasks.Phxcom.Gen.Context do
 
   # -----
 
-  defp gen_dirs(name) do
+  defp dir_list do
     ~w(aggregate command com_mw com_hand com_router com_val 
-       event ev_hand ev_pro proc_man read_schema read_query)
-    |> Enum.each(fn subdir -> gen_dir(name, subdir) end)
+      event ev_hand ev_pro proc_man read_schema read_query)
+  end
+
+  defp gen_dirs(name) do
+    dir_list()
+    |> Enum.each(fn subdir -> gen_dir(name, subdir, "lib") end)
+
+    dir_list()
+    |> Enum.each(fn subdir -> gen_dir(name, subdir, "test") end)
 
     :ok
   end
 
-  defp gen_dir(name, subdir) do
-    Mix.Phxcom.ctx_dir(name, subdir)
+  defp gen_dir(name, subdir, type) do
+    Mix.Phxcom.ctx_dir(name, subdir, type)
     |> Mix.Generator.create_directory()
   end
 

@@ -31,17 +31,20 @@ def deps do
 end
 ```
 
-Then run a series of mix commands to configure your app.
+Then run mix commands to configure and run your app.
 
 ```
 $ cd my_app
 $ mix deps.get
 $ mix phxcmd.add.config
 $ mix phxcmd.add.estore
+$ MIX_ENV=test mix phxcmd.add.estore
 $ mix phxcmd.gen.html User name:string balance:float
+$ mix test
+$ mix phx.server
 ```
 
-Start your app with `mix phx.server`. Point your browser to `localhost:4000`.
+Now point your browser to `localhost:4000`.
 
 ## Mix Commands
 
@@ -74,4 +77,11 @@ Here's a CLI view...
 Here's how the Commanded elements flow together...
 
 ![CommandedElements](assets/CommandedElements.jpg)
+
+## Generator Design
+
+Database: We use Postgres for the Event Store, for `:dev`, `:prod` and `:test`
+
+Context API: We use the same API interface as is used by the native Phoenix
+Ecto generators.
 

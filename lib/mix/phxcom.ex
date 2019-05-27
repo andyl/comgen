@@ -12,17 +12,12 @@ defmodule Mix.Phxcom do
     |> Mix.Task.task_name()
   end
 
-  def lib_dir do
-    app_name()
-    |> (&("lib/#{&1}")).()
-  end
-
   def priv_dir do
     "priv"
   end
 
-  def ctx_dir(name, type) do
-    dname = String.downcase(name)
-    "#{lib_dir()}/#{dname}/#{type}"
+  def ctx_dir(ctx_name, subdir, type \\ "lib") do
+    dc_name = String.downcase(ctx_name)
+    "#{type}/#{app_name()}/#{dc_name}/#{subdir}"
   end
 end
