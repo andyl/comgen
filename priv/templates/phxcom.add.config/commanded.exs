@@ -13,7 +13,7 @@ case Mix.env() do
       event_store_adapter: Commanded.EventStore.Adapters.EventStore
 
     config :eventstore, 
-      columnn_data_type: "jsonb"
+      column_data_type: "jsonb"
 
     config :eventstore, EventStore.Storage,
       serializer: EventStore.JsonbSerializer,
