@@ -6,6 +6,9 @@ mixenv = Mix.env()
 config :commanded,
   event_store_adapter: Commanded.EventStore.Adapters.EventStore
 
+config :commanded_ecto_projections,
+  repo: BankAPI.Repo
+
 config :eventstore, 
   column_data_type: "jsonb"
 
