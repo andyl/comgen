@@ -26,7 +26,7 @@ dependencies in `my_app/mix.exs`:
 def deps do
   [
     {...},
-    {:phoenix_commanded, git: "https://github.com/andyl/phoenix_commanded"}
+    {:phoenix_commanded, git: "https://github.com/andyl/phoenix_commanded"},
   ]
 end
 ```

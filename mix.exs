@@ -19,14 +19,15 @@ defmodule PhoenixCommanded.MixProject do
   end
 
   defp deps do
-    is_configured = Application.get_all_env(:commanded) != []
-    is_using_estore = is_configured && Mix.env() != :test
+    when_configured = Application.get_all_env(:commanded) != []
+    when_using_estore = when_configured && Mix.env() != :test
     [
       {:jason, "~> 1.1"},
       {:phoenix, "~> 1.4.6"},
-      {:commanded, "~> 0.18", runtime: is_configured},
-      {:eventstore, "~> 0.16.1", runtime: is_using_estore},
-      {:commanded_eventstore_adapter, "~> 0.5", runtime: is_using_estore},
+      {:commanded, "~> 0.18", runtime: when_configured},
+      {:eventstore, "~> 0.16.1", runtime: when_using_estore},
+      {:commanded_ecto_projections, "~> 0.8"},
+      {:commanded_eventstore_adapter, "~> 0.5", runtime: when_using_estore},
     ]
   end
 end
