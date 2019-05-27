@@ -69,7 +69,11 @@ Each generated context will contain a standard set of Commanded elements.
 | Read               | read/               | R     |
 | Read Schema        | read/schema/        | RS    |
 | Read Query         | read/query/         | RQ    |
-| Saga / ProcessMgr  | saga/               | S     |
+| Saga (ProcessMgr)  | saga/               | S     |
+
+Here's how things look on the filesystem...
+
+![CommandedElements](assets/Tree.jpg)
 
 Here's how the Commanded elements flow together...
 
