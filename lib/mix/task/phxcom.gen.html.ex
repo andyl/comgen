@@ -8,7 +8,9 @@ defmodule Mix.Tasks.Phxcom.Gen.Html do
   """
 
   @doc false
-  def run(_) do
-    IO.puts "UNDER CONSTRUCTION"
+  def run(args) do
+    IO.inspect args
+    Mix.Shell.IO.info "ASDFASDFASDF"
+    Mix.Shell.IO.info args
   end
 end

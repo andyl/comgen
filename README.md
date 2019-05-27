@@ -2,6 +2,8 @@
 
 [Commanded][com] code generators for the [Phoenix Framework][phx]
 
+This is a WORK IN PROGRESS, not yet ready for live use!
+
 This repo provides generators for rapid creation of Phoenix/Commanded apps.
 The intended audience is new Commanded developers, to generate demo code and to
 get experimental apps up and running quickly.  
