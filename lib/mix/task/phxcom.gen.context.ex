@@ -53,8 +53,13 @@ defmodule Mix.Tasks.Phxcom.Gen.Context do
   # -----
 
   defp dir_list do
-    ~w(aggregate command com_mw com_hand com_router com_val 
-      event ev_hand ev_pro proc_man read_schema read_query)
+    ~w(aggregate 
+       command 
+       command/handler command/middleware command/router command/validator 
+       event 
+       event/handler event/projector 
+       read/schema read/query
+       saga)
   end
 
   defp gen_dirs(name) do
