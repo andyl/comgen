@@ -23,6 +23,7 @@ defmodule PhoenixCommanded.MixProject do
     when_using_estore = when_configured && Mix.env() != :test
     [
       {:jason, "~> 1.1"},
+      {:inflex, "~> 1.10.0"},
       {:phoenix, "~> 1.4.6"},
       {:commanded, "~> 0.18", runtime: when_configured},
       {:eventstore, "~> 0.16.1", runtime: when_using_estore},
