@@ -1,5 +1,14 @@
 use Mix.Config
 
+config :commanded, :genspec, %{
+  "User", %{
+    fields: [
+      name: "string",
+      balance: "float"
+      ]
+  }
+}
+
 appname = Mix.Project.config[:app]
 mixenv = Mix.env()
 
@@ -21,3 +30,4 @@ config :eventstore, EventStore.Storage,
   hostname: "localhost",
   pool_size: 10,
   pool_overflow: 5
+

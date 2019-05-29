@@ -1,6 +1,5 @@
 defmodule PhoenixCommanded.MixProject do
   use Mix.Project
-  use Mix.Config
 
   defp version, do: "0.1.0"
 
