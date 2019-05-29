@@ -1,7 +1,7 @@
-defmodule Mix.Phxcom.Schema do
+defmodule Mix.Phxcom.Archive.Schema do
   @moduledoc false
 
-  alias Mix.Phxcom.Schema
+  alias Mix.Phxcom.Archive.Schema
 
   defstruct module: nil,
             repo: nil,

@@ -1,7 +1,7 @@
-defmodule Mix.Phxcom.Context do
+defmodule Mix.Phxcom.Archive.Context do
   @moduledoc false
 
-  alias Mix.Phxcom.{Context, Schema}
+  alias Mix.Phxcom.Archive.{Context, Schema}
 
   defstruct name: nil,
             module: nil,

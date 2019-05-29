@@ -1,61 +1,13 @@
-defmodule Mix.Phxcom.Blueprint do
+defmodule Mix.Phxcom.AppData do
   @moduledoc false
 
-  # alias Mix.Phxcom.Blueprint
+  import Mix.Phxcom
 
-  defstruct context: nil,
-            opts: [],
-            file: nil,
-            attrs: [],
-            string_attr: nil,
-            plural: nil,
-            singular: nil,
-            uniques: [],
-            assocs: [],
-            types: [],
-            indexes: [],
-            defaults: [],
-            human_singular: nil,
-            human_plural: nil,
-            binary_id: false,
-            migration_defaults: nil,
-            migration?: false,
-            params: %{},
-            sample_id: nil,
-            web_path: nil,
-            web_namespace: nil,
-            context_app: nil,
-            route_helper: nil,
-            migration_module: nil
+  defstruct app: nil,
+            app_module: nil,
+            app_repo: nil
 
-  # @valid_types [
-  #   :integer,
-  #   :float,
-  #   :decimal,
-  #   :boolean,
-  #   :map,
-  #   :string,
-  #   :array,
-  #   :references,
-  #   :text,
-  #   :date,
-  #   :time,
-  #   :time_usec,
-  #   :naive_datetime,
-  #   :naive_datetime_usec,
-  #   :utc_datetime,
-  #   :utc_datetime_usec,
-  #   :uuid,
-  #   :binary
-  # ]
-
-  # def valid_types, do: @valid_types
-  #
-  # def valid?(blueprint) do
-  #   blueprint =~ ~r/^[A-Z]\w*(\.[A-Z]\w*)*$/
-  # end
-
-  # def new(blueprint_name, blueprint_plural, cli_attrs, opts) do
+  # def new(ctx_name) do
   #   ctx_app   = opts[:context_app] || Mix.Phoenix.context_app()
   #   otp_app   = Mix.Phoenix.otp_app()
   #   opts      = Keyword.merge(Application.get_env(otp_app, :generators, []), opts)
@@ -120,6 +72,10 @@ defmodule Mix.Phxcom.Blueprint do
   #     context_app: ctx_app,
   #     generate?: generate?,
   #     migration_module: migration_module()}
+  # end
+
+  # def valid?(blueprint) do
+  #   blueprint =~ ~r/^[A-Z]\w*(\.[A-Z]\w*)*$/
   # end
 
   # @doc """
