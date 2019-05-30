@@ -14,7 +14,7 @@ defmodule Mix.Tasks.Phxcom.Gen.Context do
 
   @doc false
   def run(args) do
-    case args do,
+    case args do
       [_] -> usage()
       [name | fields] -> gen_ctx(name, fields)
       _ -> usage()

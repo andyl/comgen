@@ -3,13 +3,8 @@ defmodule PhoenixCommanded.MixProject do
 
   defp version, do: "0.1.0"
 
-  defp ding do
-    %{bing: "asdf", bong: "qwer"}
-  end
-
   defp deps do
     when_configured = Application.get_all_env(:commanded) != []
-    # when_using_estore = when_configured && Mix.env() != :test
     when_using_estore = when_configured
 
     [

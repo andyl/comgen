@@ -5,12 +5,11 @@ defmodule Mix.Phxcom.Sample do
       fields: [
         name: "string",
         balance: "float"
-      ],
-      commands:
+      ]
     }
   end
 
-  def chat_data doo
+  def chat_data do
     %{
       context: "ChatMsg",
       fields: [

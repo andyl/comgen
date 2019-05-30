@@ -22,10 +22,10 @@ defmodule Mix.Tasks.Phxcom.Add.Config do
   @doc false
   def run(_) do
     if Mix.Project.umbrella?() do
-      Mix.raise("mix phx.gen.config can only be run inside an application directory")
+      Mix.raise("mix phx.gen.config can only run in an app directory")
     end
 
-    write_config_file)
+    write_config_file()
     add_import_line()
   end
 
