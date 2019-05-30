@@ -1,15 +1,22 @@
 use Mix.Config
 
-config :commanded, :genspec, %{
-  "User", %{
-    fields: [
-      name: "string",
-      balance: "float"
+config :commanded,
+  genspec: %{
+    User: %{
+      fields: [
+        name: "string",
+        balance: "float"
       ]
+    },
+    ChatMsg: %{
+      fields: [
+        name: "string"
+        balance: "float"
+      ]
+    }
   }
-}
 
-appname = Mix.Project.config[:app]
+appname = Mix.Project.config()[:app]
 mixenv = Mix.env()
 
 config :commanded,
@@ -18,7 +25,7 @@ config :commanded,
 config :commanded_ecto_projections,
   repo: BankAPI.Repo
 
-config :eventstore, 
+config :eventstore,
   column_data_type: "jsonb"
 
 config :eventstore, EventStore.Storage,
@@ -30,4 +37,3 @@ config :eventstore, EventStore.Storage,
   hostname: "localhost",
   pool_size: 10,
   pool_overflow: 5
-

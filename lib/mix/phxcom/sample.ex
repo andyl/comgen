@@ -10,7 +10,7 @@ defmodule Mix.Phxcom.Sample do
     }
   end
 
-  def chat_data do
+  def chat_data doo
     %{
       context: "ChatMsg",
       fields: [

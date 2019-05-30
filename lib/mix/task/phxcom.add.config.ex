@@ -25,7 +25,7 @@ defmodule Mix.Tasks.Phxcom.Add.Config do
       Mix.raise("mix phx.gen.config can only be run inside an application directory")
     end
 
-    write_config_file()
+    write_config_file)
     add_import_line()
   end
 
