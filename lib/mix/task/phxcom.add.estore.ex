@@ -24,8 +24,8 @@ defmodule Mix.Tasks.Phxcom.Add.Estore do
     IO.puts "Compile TEST -----\n"
     IO.puts Mix.Phxcom.oscmd("MIX_ENV=test mix compile")
     IO.puts "Estore for DEV -----\n"
-    IO.puts Mix.Phxcom.oscmd("MIX_ENV=test mix event_store.create")
-    IO.puts Mix.Phxcom.oscmd("MIX_ENV=test mix event_store.init")
+    IO.puts Mix.Phxcom.oscmd("mix event_store.create")
+    IO.puts Mix.Phxcom.oscmd("mix event_store.init")
     IO.puts "Estore for TEST -----\n"
     IO.puts Mix.Phxcom.oscmd("MIX_ENV=test mix event_store.create")
     IO.puts Mix.Phxcom.oscmd("MIX_ENV=test mix event_store.init")
