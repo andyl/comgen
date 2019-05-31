@@ -10,8 +10,12 @@ Experienced Commanded developers can bypass this scaffolding and use the
 Commanded tooling directly.
 
 The overall direction is to explore how to generate a Commanded app from a
-data-structure like [GraphQL SDL][sdl].  To guide our work, we'll follow the
-application described in [Event Sourcing with Elixir][ese] by Bruno Antunes.  
+data-structure like [GraphQL SDL][sdl]. (we call our data-structure a
+`comspec`)  To guide our work, we'll loosely follow the directions given in
+[Event Sourcing with Elixir][ese] by Bruno Antunes.  
+
+Find our `comspec` template at `priv/templates/phxcom.add.config/comspec.exs`
+(a work-in-progress...)
 
 I'll slowly chip away at this, and welcome collaborators and PRs.  Chat about
 Commanded on [Gitter][gtr] or [Slack][slk].
@@ -21,7 +25,7 @@ Commanded on [Gitter][gtr] or [Slack][slk].
 [sdl]: https://graphql.org/learn/schema
 [gtr]: https://gitter.im/commanded/Lobby
 [slk]: https://elixir-lang.slack.com
-[ese]: http://blog.nootch.net/post/event-sourcing-with-elixir
+[ese]: https://blog.nootch.net/post/event-sourcing-with-elixir/
 
 ## Instructions
 
@@ -48,9 +52,9 @@ Then run mix commands to configure your app and generate code.
 
 ```
 $ mix deps.get
-$ mix phxcom.add.config    # add Commanded config w/comspec
-$ mix phxcom.add.estore    # add Commanded event-stores
-$ mix phxcom.gen.code      # generate Aggregates, Commands, Events, ...
+$ mix phxcom.add.config   # add Commanded config w/comspec
+$ mix phxcom.add.estore   # add Commanded event-stores
+$ mix phxcom.gen.code     # generate Aggregates, Commands, Events, ...
 ```
 
 At this point, you'll have a set of generated directories and source files.
@@ -58,11 +62,9 @@ You'll have to manually fill out the code stubs, then you can compile and run
 your application.
 
 ```
-$ mix compile              # compile the generated code
-$ mix ecto.create          # create read-store 
-$ mix ecto.migrate         # migrate the read-store
-$ mix test                 # run tests
-$ mix phx.server           # run server
+$ mix compile             # compile the generated code
+$ mix ecto.setup          # setup read-store
+$ mix phx.server          # run server
 ```
 
 In another terminal view your API endpoints with `$ mix phx.routes`.
