@@ -1,16 +1,16 @@
 # PhoenixCommanded
 
-A [Commanded][com] code generator for the [Phoenix Framework][phx].  This is 
+A [Commanded][com] code generator for [Phoenix][phx] applications.  This is
 UNDER CONSTRUCTION, not ready for live use!
 
 The intended audience for this generator is new Commanded developers, to
-generate demo code and to get experimental apps up and running quickly.  
+get experimental apps up and running quickly.  
 
 Experienced Commanded developers should bypass this scaffolding and use the
 Commanded tooling directly.
 
 The overall direction is to explore the feasibility of generating a Commanded
-application from a data-structure like [GraphQL SDL][sdl].  I'll slowly poke
+application from a data-structure like [GraphQL SDL][sdl].  I'll slowly chip
 away at this, and welcome discussion / collaborators / PRs.
 
 [com]: https://github.com/commanded/commanded
@@ -21,7 +21,10 @@ away at this, and welcome discussion / collaborators / PRs.
 
 First, generate a Phoenix app:
 
-    mix phx.new my_app
+```
+$ mix phx.new my_app
+$ cd my_app
+```
 
 Then install this package by adding `phoenix_commanded` to your list of
 dependencies in `my_app/mix.exs`:
@@ -38,11 +41,10 @@ end
 Then run mix commands to configure and run your app.
 
 ```
-$ cd my_app
 $ mix deps.get
 $ mix phxcmd.add.config    # add Commanded config w/comspec
 $ mix phxcmd.add.estore    # add Commanded event-stores
-$ mix phxcmd.gen.code      # generate Aggregates, Commands, Events...
+$ mix phxcmd.gen.code      # generate Aggregates, Commands, Events, ...
 $ mix compile              # compile the generated code
 $ mix ecto.create          # create read-store 
 $ mix ecto.migrate         # migrate the read-store
@@ -97,7 +99,7 @@ Here's how the Commanded elements flow together...
 Database: We use Postgres for the Event Store, for `:dev`, `:prod` and `:test`
 
 Context API: We generate the same API interface as is used by the standard
-Phoenix/Ecto generators.  Your Commanded contexts should be inter-operable with
+Phoenix/Ecto generators.  Your Commanded contexts should be interoperable with
 a Phoenix-generated context, and should work seamlessly with Phoenix-generated
 views.
 
