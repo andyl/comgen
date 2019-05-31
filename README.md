@@ -12,7 +12,7 @@ Commanded tooling directly.
 The overall direction is to explore the feasibility of generating a Commanded
 application from a data-structure like [GraphQL SDL][sdl].  I'll slowly chip
 away at this, and welcome collaborators and PRs.  Chat about Commanded on
-[Gitter][git] or [Slack][slk].
+[Gitter][gtr] or [Slack][slk].
 
 [com]: https://github.com/commanded/commanded
 [phx]: https://phoenixframework.org
