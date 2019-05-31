@@ -6,26 +6,29 @@ UNDER CONSTRUCTION, not ready for live use!
 The intended audience is new Commanded developers, to get experimental apps up
 and running quickly.  
 
-Experienced Commanded developers should bypass this scaffolding and use the
+Experienced Commanded developers can bypass this scaffolding and use the
 Commanded tooling directly.
 
-The overall direction is to explore the feasibility of generating a Commanded
-application from a data-structure like [GraphQL SDL][sdl].  I'll slowly chip
-away at this, and welcome collaborators and PRs.  Chat about Commanded on
-[Gitter][gtr] or [Slack][slk].
+The overall direction is to explore how to generate a Commanded app from a
+data-structure like [GraphQL SDL][sdl].  To guide our work, we'll follow the
+application described in [Event Sourcing with Elixir][ese] by Bruno Antunes.  
+
+I'll slowly chip away at this, and welcome collaborators and PRs.  Chat about
+Commanded on [Gitter][gtr] or [Slack][slk].
 
 [com]: https://github.com/commanded/commanded
 [phx]: https://phoenixframework.org
 [sdl]: https://graphql.org/learn/schema
 [gtr]: https://gitter.im/commanded/Lobby
 [slk]: https://elixir-lang.slack.com
+[ese]: https://blog.nootch.net/post/event-sourcing-with-elixir
 
 ## Instructions
 
-First, generate a Phoenix app:
+First, generate an API-only Phoenix app:
 
 ```
-$ mix phx.new my_app
+$ mix phx.new my_app --no-webpack --no-html
 $ cd my_app
 ```
 
@@ -41,13 +44,20 @@ def deps do
 end
 ```
 
-Then run mix commands to configure and run your app.
+Then run mix commands to configure your app and generate code.
 
 ```
 $ mix deps.get
-$ mix phxcmd.add.config    # add Commanded config w/comspec
-$ mix phxcmd.add.estore    # add Commanded event-stores
-$ mix phxcmd.gen.code      # generate Aggregates, Commands, Events, ...
+$ mix phxcom.add.config    # add Commanded config w/comspec
+$ mix phxcom.add.estore    # add Commanded event-stores
+$ mix phxcom.gen.code      # generate Aggregates, Commands, Events, ...
+```
+
+At this point, you'll have a set of generated directories and source files.
+You'll have to manually fill out the code stubs, then you can compile and run
+your application.
+
+```
 $ mix compile              # compile the generated code
 $ mix ecto.create          # create read-store 
 $ mix ecto.migrate         # migrate the read-store
@@ -55,18 +65,21 @@ $ mix test                 # run tests
 $ mix phx.server           # run server
 ```
 
-Now point your browser to `localhost:4000`.
+In another terminal view your API endpoints with `$ mix phx.routes`.
+
+Now you can use `curl` or your favorite rest-client to interact with your
+Phoenix/Commanded application.
 
 ## Mix Commands
 
-Run `mix phxcmd` to see all generators and generator options.
+Run `$ mix phxcom` to see all generators and generator options.
 
 ## The Comspec
 
 Phxcom code generation is specified as a configuration option in the file
-`config/commanded.exs`.  (see the `commanded/comspec` section...)
+`config/comspec.exs`. 
 
-You can view the comspec with the command `$ mix phxcmd.show.comspec`.
+You can view the comspec with the command `$ mix phxcom.show.comspec`.
 
 ## Commanded Elements
 

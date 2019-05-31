@@ -25,19 +25,20 @@ defmodule Mix.Tasks.Phxcom.Add.Config do
       Mix.raise("mix phx.gen.config can only run in an app directory")
     end
 
-    write_config_file()
+    write_config_file("commanded")
+    write_config_file("comspec")
     add_import_line()
   end
 
-  defp write_config_file do
+  defp write_config_file(file) do
     text =
       :code.priv_dir(:phoenix_commanded)
-      |> (&"#{&1}/templates/phxcom.add.config/commanded.exs").()
+      |> (&"#{&1}/templates/phxcom.add.config/#{file}.exs").()
       |> File.read()
       |> elem(1)
       |> EEx.eval_string([])
 
-    Generator.create_file("config/commanded.exs", text)
+    Generator.create_file("config/#{file}.exs", text)
   end
 
   defp add_import_line do

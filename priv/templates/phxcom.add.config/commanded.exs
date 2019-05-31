@@ -4,22 +4,6 @@ app = Mix.Project.config()[:app]
 env = Mix.env()
 
 config :commanded,
-  comspec: %{
-    User: %{
-      fields: [
-        name: "string",
-        balance: "float"
-      ]
-    },
-    ChatMsg: %{
-      fields: [
-        user: "string",
-        text: "string"
-      ]
-    }
-  }
-
-config :commanded,
   event_store_adapter: Commanded.EventStore.Adapters.EventStore
 
 config :commanded_ecto_projections,
@@ -37,3 +21,5 @@ config :eventstore, EventStore.Storage,
   hostname: "localhost",
   pool_size: 10,
   pool_overflow: 5
+
+import_config("comspec.exs")
