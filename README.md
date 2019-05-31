@@ -72,14 +72,14 @@ Phoenix/Commanded application.
 
 ## Mix Commands
 
-Run `$ mix phxcmd` to see all generators and generator options.
+Run `$ mix phxcom` to see all generators and generator options.
 
 ## The Comspec
 
 Phxcom code generation is specified as a configuration option in the file
 `config/comspec.exs`. 
 
-You can view the comspec with the command `$ mix phxcmd.show.comspec`.
+You can view the comspec with the command `$ mix phxcom.show.comspec`.
 
 ## Commanded Elements
 
