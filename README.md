@@ -1,19 +1,23 @@
 # PhoenixCommanded
 
-[Commanded][com] code generators for the [Phoenix Framework][phx].  This is 
+A [Commanded][com] code generator for the [Phoenix Framework][phx].  This is 
 UNDER CONSTRUCTION, not ready for live use!
 
-This repo has generators for rapid creation of Phoenix/Commanded apps.  The
-intended audience is new Commanded developers, to generate demo code and to get
-experimental apps up and running quickly.  
+The intended audience for this generator is new Commanded developers, to
+generate demo code and to get experimental apps up and running quickly.  
 
 Experienced Commanded developers should bypass this scaffolding and use the
 Commanded tooling directly.
 
+The overall direction is to explore the feasibility of generating a Commanded
+application from a data-structure like [GraphQL SDL][sdl].  I'll slowly poke
+away at this, and welcome discussion / collaborators / PRs.
+
 [com]: https://github.com/commanded/commanded
 [phx]: https://phoenixframework.org
+[sdl]: https://graphql.org/learn/schema
 
-## Installation
+## Instructions
 
 First, generate a Phoenix app:
 
@@ -36,10 +40,10 @@ Then run mix commands to configure and run your app.
 ```
 $ cd my_app
 $ mix deps.get
-$ mix phxcmd.add.config    # add Commanded config
+$ mix phxcmd.add.config    # add Commanded config w/comspec
 $ mix phxcmd.add.estore    # add Commanded event-stores
-$ mix phxcmd.gen.code      # generate code 
-$ mix compile              # compile code
+$ mix phxcmd.gen.code      # generate Aggregates, Commands, Events...
+$ mix compile              # compile the generated code
 $ mix ecto.create          # create read-store 
 $ mix ecto.migrate         # migrate the read-store
 $ mix test                 # run tests
@@ -52,9 +56,10 @@ Now point your browser to `localhost:4000`.
 
 Run `mix phxcmd` to see all generators and generator options.
 
-## The Phxcom Comspec
+## The Comspec
 
-Phxcom code generation is specified in the file `config/commanded.exs`.
+Phxcom code generation is specified as a configuration option in the file
+`config/commanded.exs`.  (see the `commanded/comspec` section...)
 
 You can view the comspec with the command `$ mix phxcmd.show.comspec`.
 
@@ -91,6 +96,8 @@ Here's how the Commanded elements flow together...
 
 Database: We use Postgres for the Event Store, for `:dev`, `:prod` and `:test`
 
-Context API: We use the same API interface as is used by the native Phoenix
-Ecto generators.
+Context API: We generate the same API interface as is used by the standard
+Phoenix/Ecto generators.  Your Commanded contexts should be inter-operable with
+a Phoenix-generated context, and should work seamlessly with Phoenix-generated
+views.
 
