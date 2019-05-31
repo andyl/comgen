@@ -1,23 +1,33 @@
 # PhoenixCommanded
 
-[Commanded][com] code generators for the [Phoenix Framework][phx].  This is 
-UNDER CONSTRUCTION, not yet ready for live use!
+A [Commanded][com] code generator for [Phoenix][phx] applications.  This is
+UNDER CONSTRUCTION, not ready for live use!
 
-This repo provides generators for rapid creation of Phoenix/Commanded apps.
-The intended audience is new Commanded developers, to generate demo code and to
-get experimental apps up and running quickly.  
+The intended audience is new Commanded developers, to get experimental apps up
+and running quickly.  
 
 Experienced Commanded developers should bypass this scaffolding and use the
 Commanded tooling directly.
 
+The overall direction is to explore the feasibility of generating a Commanded
+application from a data-structure like [GraphQL SDL][sdl].  I'll slowly chip
+away at this, and welcome collaborators and PRs.  Chat about Commanded on
+[Gitter][gtr] or [Slack][slk].
+
 [com]: https://github.com/commanded/commanded
 [phx]: https://phoenixframework.org
+[sdl]: https://graphql.org/learn/schema
+[gtr]: https://gitter.im/commanded/Lobby
+[slk]: https://elixir-lang.slack.com
 
-## Installation
+## Instructions
 
 First, generate a Phoenix app:
 
-    mix phx.new my_app
+```
+$ mix phx.new my_app
+$ cd my_app
+```
 
 Then install this package by adding `phoenix_commanded` to your list of
 dependencies in `my_app/mix.exs`:
@@ -34,14 +44,15 @@ end
 Then run mix commands to configure and run your app.
 
 ```
-$ cd my_app
 $ mix deps.get
-$ mix phxcmd.add.config
-$ mix phxcmd.add.estore
-$ MIX_ENV=test mix phxcmd.add.estore
-$ mix phxcmd.gen.html User name:string balance:float
-$ mix test
-$ mix phx.server
+$ mix phxcmd.add.config    # add Commanded config w/comspec
+$ mix phxcmd.add.estore    # add Commanded event-stores
+$ mix phxcmd.gen.code      # generate Aggregates, Commands, Events, ...
+$ mix compile              # compile the generated code
+$ mix ecto.create          # create read-store 
+$ mix ecto.migrate         # migrate the read-store
+$ mix test                 # run tests
+$ mix phx.server           # run server
 ```
 
 Now point your browser to `localhost:4000`.
@@ -50,38 +61,48 @@ Now point your browser to `localhost:4000`.
 
 Run `mix phxcmd` to see all generators and generator options.
 
+## The Comspec
+
+Phxcom code generation is specified as a configuration option in the file
+`config/commanded.exs`.  (see the `commanded/comspec` section...)
+
+You can view the comspec with the command `$ mix phxcmd.show.comspec`.
+
 ## Commanded Elements
 
 Each generated context will contain a standard set of Commanded elements.
 
-| Element            | Directory    | Module Name           | Alias |
-|--------------------|--------------|-----------------------|-------|
-| API                | /            | MyApp.User            | User  |
-| Aggregate          | aggregate/   | MyApp.User.Aggregate  | A     |
-| Command            | command/     | MyApp.User.Command    | C     |
-| Command Middleware | com_mw/      | MyApp.User.ComMw      | CM    |
-| Command Handler    | com_hand/    | MyApp.User.ComHand    | CH    |
-| Command Router     | com_router/  | MyApp.User.ComRouter  | CR    |
-| Command Validator  | com_val/     | MyApp.User.ComVal     | CV    |
-| Event              | event/       | MyApp.User.Event      | E     |
-| Event Handler      | ev_hand/     | MyApp.User.EvHand     | EH    |
-| Event Projector    | ev_pro/      | MyApp.User.EvPro      | EP    |
-| Process Manager    | proc_man/    | MyApp.User.ProcMan    | PM    |
-| Read Schema        | read_schema/ | MyApp.User.ReadSchema | RS    |
-| Read Query         | read_query/  | MyApp.User.ReadQuery  | RQ    |
+| Element            | Directory           | Alias |
+|--------------------|---------------------|-------|
+| API                | /                   | User  |
+| Aggregate          | aggregate/          | A     |
+| Command            | command/            | C     |
+| Command Middleware | command/middleware/ | CM    |
+| Command Handler    | command/handler/    | CH    |
+| Command Router     | command/router/     | CR    |
+| Command Validator  | command/validator/  | CV    |
+| Event              | event/              | E     |
+| Event Handler      | event/handler/      | EH    |
+| Event Projector    | event/projector/    | EP    |
+| Read               | read/               | R     |
+| Read Schema        | read/schema/        | RS    |
+| Read Query         | read/query/         | RQ    |
+| Saga (ProcessMgr)  | saga/               | S     |
 
-Here's a CLI view...
+Here's how things look on the filesystem...
 
-![CommandedCLI](assets/CLI.jpg)
+![CommandedElements](assets/Tree.jpg)
 
 Here's how the Commanded elements flow together...
 
 ![CommandedElements](assets/CommandedElements.jpg)
 
-## Generator Design
+## Design Notes
 
 Database: We use Postgres for the Event Store, for `:dev`, `:prod` and `:test`
 
-Context API: We use the same API interface as is used by the native Phoenix
-Ecto generators.
+Context API: We generate the same API interface as is used by the standard
+Phoenix/Ecto generators.  Your Commanded contexts should be interoperable with
+a Phoenix-generated context, and should work seamlessly with Phoenix-generated
+views.
 

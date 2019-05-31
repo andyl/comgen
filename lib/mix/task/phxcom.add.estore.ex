@@ -6,17 +6,28 @@ defmodule Mix.Tasks.Phxcom.Add.Estore do
   @moduledoc """
   Add Commanded Event Store
 
-  Runs two mix tasks:
+  Runs mix tasks:
 
-      mix run event_store.create
-      mix run event_store.init
-
+      mix compile
+      MIX_ENV=test mix compile
+      mix event_store.create
+      mix event_store.init
+      MIX_ENV=test mix event_store.create
+      MIX_ENV=test mix event_store.init
 
   """
 
   @doc false
   def run(_) do
-    Mix.Tasks.EventStore.Create.run([])
-    Mix.Tasks.EventStore.Init.run([])
+    IO.puts "Compile DEV -----\n"
+    IO.puts Mix.Phxcom.oscmd("mix compile")
+    IO.puts "Compile TEST -----\n"
+    IO.puts Mix.Phxcom.oscmd("MIX_ENV=test mix compile")
+    IO.puts "Estore for DEV -----\n"
+    IO.puts Mix.Phxcom.oscmd("MIX_ENV=test mix event_store.create")
+    IO.puts Mix.Phxcom.oscmd("MIX_ENV=test mix event_store.init")
+    IO.puts "Estore for TEST -----\n"
+    IO.puts Mix.Phxcom.oscmd("MIX_ENV=test mix event_store.create")
+    IO.puts Mix.Phxcom.oscmd("MIX_ENV=test mix event_store.init")
   end
 end
