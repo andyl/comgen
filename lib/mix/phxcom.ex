@@ -26,8 +26,8 @@ defmodule Mix.Phxcom do
     |> :os.cmd()
   end
 
-  def genspec do
-    Application.get_env(:commanded, :genspec)
+  def comspec do
+    Application.get_env(:commanded, :comspec)
   end
 
   def priv_dir do

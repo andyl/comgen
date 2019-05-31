@@ -56,7 +56,7 @@ Run `mix phxcmd` to see all generators and generator options.
 
 Phxcom code generation is specified in the file `config/commanded.exs`.
 
-You can view the genspec with the command `$ mix phxcmd.show.genspec`.
+You can view the comspec with the command `$ mix phxcmd.show.comspec`.
 
 ## Commanded Elements
 

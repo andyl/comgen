@@ -4,7 +4,7 @@ app = Mix.Project.config()[:app]
 env = Mix.env()
 
 config :commanded,
-  genspec: %{
+  comspec: %{
     User: %{
       fields: [
         name: "string",

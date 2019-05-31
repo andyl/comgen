@@ -1,12 +1,12 @@
 defmodule Mix.Tasks.Phxcom.Gen.Code do
-  @shortdoc "Generate Commanded Code from the `genspec`"
+  @shortdoc "Generate Commanded Code from the `comspec`"
 
   @moduledoc """
-  Generates Commanded code from the `genspec`
+  Generates Commanded code from the `comspec`
 
       mix phxcom.gen.code
 
-  The `genspec` is defined in `config/commanded.exs`.
+  The `comspec` is defined in `config/commanded.exs`.
 
   """
 
