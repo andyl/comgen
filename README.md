@@ -3,19 +3,22 @@
 A [Commanded][com] code generator for [Phoenix][phx] applications.  This is
 UNDER CONSTRUCTION, not ready for live use!
 
-The intended audience for this generator is new Commanded developers, to
-get experimental apps up and running quickly.  
+The intended audience is new Commanded developers, to get experimental apps up
+and running quickly.  
 
 Experienced Commanded developers should bypass this scaffolding and use the
 Commanded tooling directly.
 
 The overall direction is to explore the feasibility of generating a Commanded
 application from a data-structure like [GraphQL SDL][sdl].  I'll slowly chip
-away at this, and welcome discussion / collaborators / PRs.
+away at this, and welcome collaborators and PRs.  Chat about Commanded on
+[Gitter][git] or [Slack][slk].
 
 [com]: https://github.com/commanded/commanded
 [phx]: https://phoenixframework.org
 [sdl]: https://graphql.org/learn/schema
+[gtr]: https://gitter.im/commanded/Lobby
+[slk]: https://elixir-lang.slack.com
 
 ## Instructions
 
