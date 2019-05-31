@@ -3,9 +3,9 @@
 [Commanded][com] code generators for the [Phoenix Framework][phx].  This is 
 UNDER CONSTRUCTION, not ready for live use!
 
-This repo provides generators for rapid creation of Phoenix/Commanded apps.
-The intended audience is new Commanded developers, to generate demo code and to
-get experimental apps up and running quickly.  
+This repo has generators for rapid creation of Phoenix/Commanded apps.  The
+intended audience is new Commanded developers, to generate demo code and to get
+experimental apps up and running quickly.  
 
 Experienced Commanded developers should bypass this scaffolding and use the
 Commanded tooling directly.
@@ -36,12 +36,14 @@ Then run mix commands to configure and run your app.
 ```
 $ cd my_app
 $ mix deps.get
-$ mix phxcmd.add.config
-$ mix phxcmd.add.estore
-$ MIX_ENV=test mix phxcmd.add.estore
-$ mix phxcmd.gen.html User name:string balance:float
-$ mix test
-$ mix phx.server
+$ mix phxcmd.add.config    # add Commanded config
+$ mix phxcmd.add.estore    # add Commanded event-stores
+$ mix phxcmd.gen.code      # generate code 
+$ mix compile              # compile code
+$ mix ecto.create          # create read-store 
+$ mix ecto.migrate         # migrate the read-store
+$ mix test                 # run tests
+$ mix phx.server           # run server
 ```
 
 Now point your browser to `localhost:4000`.
@@ -49,6 +51,12 @@ Now point your browser to `localhost:4000`.
 ## Mix Commands
 
 Run `mix phxcmd` to see all generators and generator options.
+
+## The Phxcom Genspec
+
+Phxcom code generation is specified in the file `config/commanded.exs`.
+
+You can view the genspec with the command `$ mix phxcmd.show.genspec`.
 
 ## Commanded Elements
 
@@ -79,7 +87,7 @@ Here's how the Commanded elements flow together...
 
 ![CommandedElements](assets/CommandedElements.jpg)
 
-## Generator Design
+## Design Notes
 
 Database: We use Postgres for the Event Store, for `:dev`, `:prod` and `:test`
 

@@ -1,5 +1,8 @@
 use Mix.Config
 
+app = Mix.Project.config()[:app]
+env = Mix.env()
+
 config :commanded,
   genspec: %{
     User: %{
@@ -10,20 +13,17 @@ config :commanded,
     },
     ChatMsg: %{
       fields: [
-        name: "string"
-        balance: "float"
+        user: "string",
+        text: "string"
       ]
     }
   }
-
-appname = Mix.Project.config()[:app]
-mixenv = Mix.env()
 
 config :commanded,
   event_store_adapter: Commanded.EventStore.Adapters.EventStore
 
 config :commanded_ecto_projections,
-  repo: BankAPI.Repo
+  repo: <%= Mix.Phxcom.read_store() %>
 
 config :eventstore,
   column_data_type: "jsonb"
@@ -33,7 +33,7 @@ config :eventstore, EventStore.Storage,
   types: EventStore.PostgresTypes,
   username: "postgres",
   password: "postgres",
-  database: "#{appname}_estore_#{mixenv}",
+  database: "#{app}_estore_#{env}",
   hostname: "localhost",
   pool_size: 10,
   pool_overflow: 5

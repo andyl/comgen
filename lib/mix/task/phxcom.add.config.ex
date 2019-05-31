@@ -30,10 +30,12 @@ defmodule Mix.Tasks.Phxcom.Add.Config do
   end
 
   defp write_config_file do
-    {:ok, text} =
+    text =
       :code.priv_dir(:phoenix_commanded)
       |> (&"#{&1}/templates/phxcom.add.config/commanded.exs").()
       |> File.read()
+      |> elem(1)
+      |> EEx.eval_string([])
 
     Generator.create_file("config/commanded.exs", text)
   end
