@@ -45,9 +45,9 @@ Then run mix commands to configure and run your app.
 
 ```
 $ mix deps.get
-$ mix phxcmd.add.config    # add Commanded config w/comspec
-$ mix phxcmd.add.estore    # add Commanded event-stores
-$ mix phxcmd.gen.code      # generate Aggregates, Commands, Events, ...
+$ mix phxcom.add.config    # add Commanded config w/comspec
+$ mix phxcom.add.estore    # add Commanded event-stores
+$ mix phxcom.gen.code      # generate Aggregates, Commands, Events, ...
 $ mix compile              # compile the generated code
 $ mix ecto.create          # create read-store 
 $ mix ecto.migrate         # migrate the read-store
