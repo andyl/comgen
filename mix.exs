@@ -1,7 +1,7 @@
 defmodule PhoenixCommanded.MixProject do
   use Mix.Project
 
-  defp version, do: "0.1.0"
+  defp version, do: "0.0.1"
 
   defp deps do
     when_configured = Application.get_all_env(:commanded) != []
