@@ -26,8 +26,22 @@ defmodule Mix.Phxcom do
     |> :os.cmd()
   end
 
+  @doc """
+  The comspec is defined in `config/commanded.exs`.
+
+  The comspec holds a map with a separate key for each context.
+  """
   def comspec do
     Application.get_env(:commanded, :comspec)
+  end
+
+  def contexts do
+    Map.keys(comspec())
+    |> Enum.map(&(Atom.to_string(&1)))
+  end
+
+  def snake(string) do
+    Macro.underscore(string)
   end
 
   def priv_dir do

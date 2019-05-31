@@ -52,7 +52,7 @@ Now point your browser to `localhost:4000`.
 
 Run `mix phxcmd` to see all generators and generator options.
 
-## The Phxcom Genspec
+## The Phxcom Comspec
 
 Phxcom code generation is specified in the file `config/commanded.exs`.
 

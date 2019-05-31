@@ -14,10 +14,8 @@ defmodule Mix.Tasks.Phxcom.Gen.Code do
 
   @doc false
   def run(_) do
-    with :ok <- gen_dirs("temp"),
-         :ok <- gen_files(~w(a b c)) do
-      Mix.Shell.IO.info("ok")
-    end
+    Mix.Phxcom.contexts()
+    |> Enum.each(&(gen_all(&1)))
   end
 
   # -----
@@ -32,14 +30,19 @@ defmodule Mix.Tasks.Phxcom.Gen.Code do
        saga)
   end
 
-  defp gen_dirs(name) do
+  defp gen_all(ctx) do
+    gen_dirs(ctx)
+    gen_files(ctx)
+  end
+
+  defp gen_dirs(ctx) do
+    name = Mix.Phxcom.snake(ctx)
+
     dir_list()
     |> Enum.each(fn subdir -> gen_dir(name, subdir, "lib") end)
 
     dir_list()
     |> Enum.each(fn subdir -> gen_dir(name, subdir, "test") end)
-
-    :ok
   end
 
   defp gen_dir(name, subdir, type) do
@@ -49,9 +52,8 @@ defmodule Mix.Tasks.Phxcom.Gen.Code do
 
   # -----
 
-  defp gen_files(fields) do
-    Mix.Shell.IO.info("GenFields (UNDER CONSTRUCTION)")
-    IO.inspect(fields)
-    :ok
+  defp gen_files(ctx) do
+    Mix.Shell.IO.info("Genctx (UNDER CONSTRUCTION)")
+    IO.inspect(ctx)
   end
 end
