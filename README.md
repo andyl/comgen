@@ -21,7 +21,7 @@ Commanded on [Gitter][gtr] or [Slack][slk].
 [sdl]: https://graphql.org/learn/schema
 [gtr]: https://gitter.im/commanded/Lobby
 [slk]: https://elixir-lang.slack.com
-[ese]: https://blog.nootch.net/post/event-sourcing-with-elixir
+[ese]: https://blog.nootch.net/post/event-sourcing-with-elixir/
 
 ## Instructions
 
