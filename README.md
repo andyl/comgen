@@ -9,10 +9,10 @@ and running quickly.
 Experienced Commanded developers can bypass this scaffolding and use the
 Commanded tooling directly.
 
-The overall direction is to explore how to generate a Commanded app from a
-data-structure like [GraphQL SDL][sdl]. (we call our data-structure a
-`comspec`)  To guide our work, we'll loosely follow the directions given in
-[Event Sourcing with Elixir][ese] by Bruno Antunes.  
+We will explore how to generate a Commanded app from a data-structure like
+[GraphQL SDL][sdl]. (we call our data-structure a `comspec`)  To guide the
+work, we'll loosely follow the directions in [Event Sourcing with Elixir][ese]
+by Bruno Antunes.  
 
 Find our `comspec` template at `priv/templates/phxcom.add.config/comspec.exs`
 (a work-in-progress...)
