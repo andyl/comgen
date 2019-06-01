@@ -1,7 +1,5 @@
 defmodule PhoenixCommanded do
-  @moduledoc """
-  Code generators and utilities for Phoenix / Commanded.
-  """
+  @moduledoc false
 
   @doc """
   Hello world.

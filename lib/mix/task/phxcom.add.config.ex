@@ -10,6 +10,7 @@ defmodule Mix.Tasks.Phxcom.Add.Config do
   This task adds Commanded configuration settings to your application.
 
   - Write commanded config to `config/commanded.ex`.
+  - Write comspec to `config/comspec.ex`.
   - Add a line `import_config("commanded.exs")` to your `config/config.exs` file.
 
   ## Examples

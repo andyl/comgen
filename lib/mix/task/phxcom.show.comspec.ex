@@ -4,7 +4,7 @@ defmodule Mix.Tasks.Phxcom.Show.Comspec do
   @shortdoc "Show the `comspec`"
 
   @moduledoc """
-  TBD
+  This task simply writes the current `comspec` to stdout.
   """
 
   @doc false

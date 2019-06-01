@@ -6,7 +6,7 @@ defmodule Mix.Tasks.Phxcom.Gen.Code do
 
       mix phxcom.gen.code
 
-  The `comspec` is defined in `config/commanded.exs`.
+  The `comspec` is defined in `config/comspec.exs`.
 
   """
 

@@ -15,7 +15,7 @@ work, we'll loosely follow the directions in [Event Sourcing with Elixir][ese]
 by Bruno Antunes.  
 
 Find our `comspec` template at `priv/templates/phxcom.add.config/comspec.exs`
-(a work-in-progress...)
+(you'll see it's a work-in-progress...)
 
 I'll slowly chip away at this, and welcome collaborators and PRs.  Chat about
 Commanded on [Gitter][gtr] or [Slack][slk].
