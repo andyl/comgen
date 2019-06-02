@@ -40,6 +40,14 @@ defmodule Mix.Phxcom do
   end
 
   @doc """
+  Run a shell command.
+  """
+  def shellcmd2(cmd, env \\ []) do
+    [base_cmd | args] = String.split(cmd)
+    System.cmd(base_cmd, args, env: env, into: IO.stream(:stdio, :line))
+  end
+
+  @doc """
   The comspec holds a map with a separate key for each context.
 
   The comspec is defined in `config/commanded.exs`.
