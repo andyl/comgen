@@ -32,19 +32,16 @@ defmodule Mix.Phxcom do
   end
 
   @doc """
-  Run a shell command.
+  Run a shell command and stream results to stdout.
   """
-  def shellcmd(arg) do
-    String.to_atom(arg)
-    |> :os.cmd()
-  end
-
-  @doc """
-  Run a shell command.
-  """
-  def shellcmd2(cmd, env \\ []) do
+  def shellcmd(cmd, env \\ []) do
     [base_cmd | args] = String.split(cmd)
-    System.cmd(base_cmd, args, env: env, into: IO.stream(:stdio, :line))
+
+    System.cmd(base_cmd, args,
+      env: env,
+      parallelism: false,
+      into: IO.stream(:stdio, :line)
+    )
   end
 
   @doc """
@@ -59,7 +56,7 @@ defmodule Mix.Phxcom do
   @doc false
   def contexts do
     Map.keys(comspec())
-    |> Enum.map(&(Atom.to_string(&1)))
+    |> Enum.map(&Atom.to_string(&1))
   end
 
   @doc """

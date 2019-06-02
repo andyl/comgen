@@ -14,6 +14,7 @@ defmodule PhoenixCommanded.MixProject do
       {:commanded, "~> 0.18", runtime: when_configured},
       {:eventstore, "~> 0.16.1", runtime: when_using_estore},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:porcelain, "~> 2.0"}, 
       {:commanded_ecto_projections, "~> 0.8"},
       {:commanded_eventstore_adapter, "~> 0.5", runtime: when_using_estore}
     ]
@@ -34,6 +35,7 @@ defmodule PhoenixCommanded.MixProject do
 
   def application do
     [
+      applications: [:porcelain],
       extra_applications: [:logger]
     ]
   end
