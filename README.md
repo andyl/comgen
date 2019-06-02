@@ -99,10 +99,10 @@ Each generated context will contain a standard set of Commanded elements.
 | Event              | event/              | E     |
 | Event Handler      | event/handler/      | EH    |
 | Event Projector    | event/projector/    | EP    |
+| Process Manager    | proc_man            | PM    |
 | Read               | read/               | R     |
 | Read Schema        | read/schema/        | RS    |
 | Read Query         | read/query/         | RQ    |
-| Saga (ProcessMgr)  | saga/               | S     |
 
 Here's how things look on the filesystem...
 

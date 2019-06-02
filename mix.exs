@@ -43,10 +43,8 @@ defmodule PhoenixCommanded.MixProject do
       main: "readme",
       assets: "assets",
       extras: [
-        "README.md",
-      ],
+        "README.md"
+      ]
     ]
   end
-
-
 end
