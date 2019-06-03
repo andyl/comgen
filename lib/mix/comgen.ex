@@ -25,10 +25,18 @@ defmodule Mix.Comgen do
     |> List.first()
   end
 
-  @doc false
-  def taskname do
-    __MODULE__
-    |> Mix.Task.task_name()
+  @doc """
+  Generate help_table text.
+  """
+  def help_table do
+    TableRex.quick_render!(Comspec.help_table())
+  end
+
+  @doc """
+  Print help_table text.
+  """
+  def print_help_table do
+    IO.puts(help_table())
   end
 
   @doc """
@@ -43,7 +51,6 @@ defmodule Mix.Comgen do
       into: IO.stream(:stdio, :line)
     )
   end
-
 
   @doc """
   Convert string to snake-case.

@@ -51,7 +51,12 @@ defmodule Comspec do
   """
   def help_table do
     keys()
-    |> Enum.map(&([&1, data(&1)[:spec_shortdoc]]))
+    |> Enum.map(&([clean(&1), data(&1)[:spec_shortdoc]]))
+  end
 
+  defp clean(name) do
+    name
+    |> to_string
+    |> String.replace(~r/Elixir./, "")
   end
 end
