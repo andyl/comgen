@@ -1,4 +1,4 @@
-defmodule PhoenixCommanded do
+defmodule Comgen do
   @moduledoc false
 
   @doc """
@@ -6,7 +6,7 @@ defmodule PhoenixCommanded do
 
   ## Examples
 
-      iex> PhoenixCommanded.hello()
+      iex> Comgen.hello()
       :world
 
   """

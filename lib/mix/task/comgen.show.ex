@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Phxcom.Show.Comspec do
+defmodule Mix.Tasks.Comgen.Show.Comspec do
   use Mix.Task
 
   @shortdoc "Show the `comspec`"
@@ -9,6 +9,6 @@ defmodule Mix.Tasks.Phxcom.Show.Comspec do
 
   @doc false
   def run(_) do
-    IO.inspect Mix.Phxcom.comspec()
+    IO.inspect Mix.Comgen.comspec()
   end
 end

@@ -1,4 +1,4 @@
-defmodule Mix.Phxcom do
+defmodule Mix.Comgen do
   @moduledoc """
   This module has helper utilities for use within mix tasks.
   """
@@ -50,7 +50,7 @@ defmodule Mix.Phxcom do
   The comspec is defined in `config/commanded.exs`.
   """
   def comspec do
-    Application.get_env(:commanded, :comspec)
+    Application.get_env(:comspec, :comspec)
   end
 
   @doc false

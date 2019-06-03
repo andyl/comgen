@@ -25,3 +25,4 @@ phoenix_commanded-*.tar
 mix.lock
 
 .elixir_ls/
+/.elixir_ls/
