@@ -44,20 +44,6 @@ defmodule Mix.Comgen do
     )
   end
 
-  @doc """
-  The comspec holds a map with a separate key for each context.
-
-  The comspec is defined in `config/commanded.exs`.
-  """
-  def comspec do
-    Application.get_env(:comspec, :comspec)
-  end
-
-  @doc false
-  def contexts do
-    Map.keys(comspec())
-    |> Enum.map(&Atom.to_string(&1))
-  end
 
   @doc """
   Convert string to snake-case.

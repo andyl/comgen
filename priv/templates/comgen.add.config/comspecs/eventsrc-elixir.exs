@@ -4,6 +4,13 @@ use Mix.Config
 # Antunes.  https://blog.nootch.net/post/event-sourcing-with-elixir/
 
 config :comspecs, EventSourcingElixir,
+
+  spec_name: nil,
+  spec_shortdoc: "Event Sourcing with Elixir",
+  spec_doc: nil,
+  spec_run_before: nil,
+  spec_run_after: nil,
+
   aggregates: nil,
   commands: nil,
   command_handlers: nil,
@@ -13,9 +20,6 @@ config :comspecs, EventSourcingElixir,
   event_handlers: nil,
   event_projectors: nil,
   process_managers: nil,
-  read: nil,
-  spec_name: nil,
-  spec_doc: nil,
-  spec_run_before: nil,
-  spec_run_after: nil
+  read_schemas: nil,
+  read_queries: nil
 

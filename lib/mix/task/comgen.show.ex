@@ -9,6 +9,6 @@ defmodule Mix.Tasks.Comgen.Show.Comspec do
 
   @doc false
   def run(_) do
-    IO.inspect Mix.Comgen.comspec()
+    IO.inspect Comspec.help_table()
   end
 end

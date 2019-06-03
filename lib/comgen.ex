@@ -1,16 +1,12 @@
 defmodule Comgen do
-  @moduledoc false
+  @moduledoc """
+  Commanded generator
+  """
 
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Comgen.hello()
-      :world
-
+  Run the code generator.
   """
-  def hello do
-    :world
+  def run(comspec \\ %Comspec{}) do
+    IO.inspect(comspec)
   end
 end

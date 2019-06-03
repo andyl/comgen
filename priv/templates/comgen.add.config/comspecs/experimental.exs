@@ -3,6 +3,12 @@ use Mix.Config
 # Experimental Comspec
 
 config :comspecs, Experimental,
+  spec_name: nil,
+  spec_shortdoc: "Experimental comspec",
+  spec_doc: nil,
+  spec_run_before: nil,
+  spec_run_after: nil,
+
   aggregates: nil,
   commands: nil,
   command_handlers: nil,
@@ -12,11 +18,8 @@ config :comspecs, Experimental,
   event_handlers: nil,
   event_projectors: nil,
   process_managers: nil,
-  read: nil,
-  spec_name: nil,
-  spec_doc: nil,
-  spec_run_before: nil,
-  spec_run_after: nil
+  read_schemas: nil,
+  read_queries: nil
 
 # comspec = %{
 #   Accounts: %{
