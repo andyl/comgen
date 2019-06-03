@@ -1,10 +1,8 @@
 use Mix.Config
 
-# This comspec is inspired by the series "Event Sourcing with Elixir" by Bruno
-# Antunes.  https://blog.nootch.net/post/event-sourcing-with-elixir/
-#
+# Experimental Comspec
 
-config :comspecs, EventSourcingElixir,
+config :comspecs, Experimental,
   aggregates: nil,
   commands: nil,
   command_handlers: nil,
@@ -19,7 +17,6 @@ config :comspecs, EventSourcingElixir,
   spec_doc: nil,
   spec_run_before: nil,
   spec_run_after: nil
-
 
 # comspec = %{
 #   Accounts: %{
