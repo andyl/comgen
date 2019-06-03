@@ -1,11 +1,9 @@
 use Mix.Config
 
-# This is a basic comspec for demos and testing.
-
 config :comspecs, Base1,
 
   spec_name: nil,
-  spec_shortdoc: "Basic comspec for demos and testing.",
+  spec_shortdoc: "Basic comspec for demos and testing",
   spec_doc: nil,
   spec_run_before: nil,
   spec_run_after: nil,

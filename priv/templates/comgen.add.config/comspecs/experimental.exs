@@ -1,7 +1,5 @@
 use Mix.Config
 
-# Experimental Comspec
-
 config :comspecs, Experimental,
   spec_name: nil,
   spec_shortdoc: "Experimental comspec",

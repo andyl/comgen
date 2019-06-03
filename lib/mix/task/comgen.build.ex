@@ -18,17 +18,19 @@ defmodule Mix.Tasks.Comgen.Build do
   def run(args) do
     case args do
       [] -> IO.puts(usage_msg())
-      [name | opts] -> process(name, opts, is_valid(name))
+      [name | opts] -> process(name, opts, Comspec.valid?(name))
     end
   end
 
   defp usage_msg do
-    htext = ["COMSPEC", "DESCRIPTION"]
-    ttext = TableRex.quick_render!(Comspec.help_table(), htext)
     """
     Usage: mix comgen.build <COMSPEC>
-    #{ttext}  show comspec definition with `mix comspect.show <COMSPEC>`
-      find comspec source at `config/comspecs/*.exs`
+
+    Valid comspecs:
+
+    #{Mix.Comgen.help_table()}
+    show comspec definition with `mix comgen.show <COMSPEC>`
+    find comspec source at `config/comspecs/*.exs`
     """
   end
 
@@ -42,10 +44,5 @@ defmodule Mix.Tasks.Comgen.Build do
 
   defp process(name, _, _) do
     Comgen.run(name)
-  end
-
-  defp is_valid(name) do
-    Comspec.keys()
-    |> Enum.any?(&(&1 == name))
   end
 end

@@ -18,20 +18,22 @@ defmodule Mix.Tasks.Comgen.Show do
   def run(args) do
     case args do
       [] -> IO.puts(usage_msg())
-      [name | opts] -> process(name, opts, is_valid(name))
+      [name | opts] -> show(name, opts, Comspec.valid?(name))
     end
   end
 
   defp usage_msg do
-    htext = ["COMSPEC", "DESCRIPTION"]
-    ttext = TableRex.quick_render!(Comspec.help_table(), htext)
     """
     Usage: mix comgen.show <COMSPEC>
-    #{ttext}  find comspec source at `config/comspecs/*.exs`
+
+    Valid comspecs:
+
+    #{Mix.Comgen.help_table()}
+    find comspec source at `config/comspecs/*.exs`
     """
   end
 
-  defp process(name, _, valid_name) when not valid_name do
+  defp show(name, _, valid_name) when not valid_name do
     """
     Error: unrecognized comspec name (#{name})
     #{usage_msg()}
@@ -39,13 +41,8 @@ defmodule Mix.Tasks.Comgen.Show do
     |> IO.puts()
   end
 
-  defp process(name, _, _) do
+  defp show(name, _, _) do
     Comspec.data(name)
     |> IO.inspect()
-  end
-
-  defp is_valid(name) do
-    Comspec.keys()
-    |> Enum.any?(&(&1 == name))
   end
 end

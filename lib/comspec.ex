@@ -36,12 +36,29 @@ defmodule Comspec do
   end
 
   @doc """
+  Comspec keys as strings.
+  """
+  def string_keys do
+    keys()
+    |> Enum.map(&to_string(&1))
+    |> Enum.map(&String.replace(&1, ~r/Elixir./, ""))
+  end
+
+  @doc """
+  Key in keys?
+  """
+  def valid?(key) do
+    skey = to_string(key)
+    Enum.any?(string_keys(), &(&1 == skey))
+  end
+
+  @doc """
   A comspec holds a struct with configuration specs for a Commanded context.
 
   The comspecs are defined in `config/comspecs/*.exs`.
   """
   def data(key) do
-    Application.get_env(:comspecs, key)
+    Application.get_env(:comspecs, to_module(key))
   end
 
   @doc """
@@ -50,13 +67,16 @@ defmodule Comspec do
   For use in mix-task help messages.
   """
   def help_table do
-    keys()
-    |> Enum.map(&([clean(&1), data(&1)[:spec_shortdoc]]))
+    string_keys()
+    |> Enum.map(&[&1, data(&1)[:spec_shortdoc]])
   end
 
-  defp clean(name) do
-    name
-    |> to_string
-    |> String.replace(~r/Elixir./, "")
+  defp to_module(input) when is_atom(input) do
+    input
+  end
+
+  defp to_module(input) do
+    base = String.replace(input, ~r/Elixir./, "")
+    String.to_atom("Elixir.#{base}")
   end
 end

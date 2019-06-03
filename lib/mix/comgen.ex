@@ -29,14 +29,12 @@ defmodule Mix.Comgen do
   Generate help_table text.
   """
   def help_table do
-    TableRex.quick_render!(Comspec.help_table())
-  end
-
-  @doc """
-  Print help_table text.
-  """
-  def print_help_table do
-    IO.puts(help_table())
+    render_opts = [horizontal_style: :off, vertical_style: :all, vertical_symbol: "#"]
+    TableRex.Table.new(Comspec.help_table())
+    |> TableRex.Table.render!(render_opts)
+    |> String.replace(~r/^# /, "")
+    |> String.replace(~r/ #$/, "")
+    |> String.replace(~r/#\n# /, "\n")
   end
 
   @doc """
