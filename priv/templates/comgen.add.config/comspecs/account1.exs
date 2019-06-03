@@ -16,10 +16,10 @@ config :comspecs, Account1,
   command_routers: nil,
   command_validators: nil,
   events: [
-    %Event{name: "AccountOpened", fields: [:account_number, :initial_balance]},
-    %Event{name: "AccountClosed", fields: [:account_number]},
-    %Event{name: "AccountCredited", fields: [:account_number, :amount]},
-    %Event{name: "AccountDebited", fields: [:account_number, :amount]}
+    %{name: "AccountOpened", fields: [:account_number, :initial_balance]},
+    %{name: "AccountClosed", fields: [:account_number]},
+    %{name: "AccountCredited", fields: [:account_number, :amount]},
+    %{name: "AccountDebited", fields: [:account_number, :amount]}
   ],
   event_handlers: nil,
   event_projectors: nil,
