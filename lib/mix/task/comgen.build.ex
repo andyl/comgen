@@ -18,7 +18,7 @@ defmodule Mix.Tasks.Comgen.Build do
   def run(args) do
     case args do
       [] -> IO.puts(usage_msg())
-      [name | opts] -> process(name, opts, Comspec.valid?(name))
+      [name | opts] -> process(name, opts, ComspecConfig.valid_key?(name))
     end
   end
 

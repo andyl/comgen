@@ -1,11 +1,12 @@
-defmodule Comspec.Aggregate do
+defmodule Comspec.Event do
   @moduledoc """
-  A struct to handle a comspec.
+  A struct to handle an Event.
   """
 
   use TypedStruct
 
   typedstruct do
-    field(:name, list())
+    field(:name, String.t())
+    field(:fields, list())
   end
 end

@@ -18,7 +18,7 @@ defmodule Mix.Tasks.Comgen.Show do
   def run(args) do
     case args do
       [] -> IO.puts(usage_msg())
-      [name | opts] -> show(name, opts, Comspec.valid?(name))
+      [name | opts] -> show(name, opts, ComspecConfig.valid_key?(name))
     end
   end
 
@@ -42,7 +42,7 @@ defmodule Mix.Tasks.Comgen.Show do
   end
 
   defp show(name, _, _) do
-    Comspec.data(name)
+    ComspecConfig.kw_data(name)
     |> IO.inspect()
   end
 end

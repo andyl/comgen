@@ -1,4 +1,4 @@
-defmodule Comspec.Event do
+defmodule Comspec.Aggregate do
   @moduledoc """
   A struct to handle an Event
   """
