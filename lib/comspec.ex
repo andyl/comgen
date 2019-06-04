@@ -27,6 +27,10 @@ defmodule Comspec do
     field(:read_queries, list())
   end
 
+  def hello do
+    "world"
+  end
+
   @doc """
   Run the code generator.
   """
