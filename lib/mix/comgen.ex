@@ -26,23 +26,6 @@ defmodule Mix.Comgen do
   end
 
   @doc """
-  Generate help_table text.
-  """
-  def help_table do
-    render_opts = [
-      horizontal_style: :off,
-      vertical_style: :all,
-      vertical_symbol: "#"
-    ]
-
-    TableRex.Table.new(ComspecConfig.help_table())
-    |> TableRex.Table.render!(render_opts)
-    |> String.replace(~r/^# /, "")
-    |> String.replace(~r/ #$/, "")
-    |> String.replace(~r/#\n# /, "\n")
-  end
-
-  @doc """
   Run a shell command and stream results to stdout.
   """
   def shellcmd(cmd, env \\ []) do

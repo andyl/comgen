@@ -28,7 +28,7 @@ defmodule Mix.Tasks.Comgen.Build do
 
     Valid comspecs:
 
-    #{Mix.Comgen.help_table()}
+    #{Mix.Comspec.help_table()}
     show comspec definition with `mix comgen.show <COMSPEC>`
     find comspec source at `config/comspecs/*.exs`
     """
@@ -43,6 +43,6 @@ defmodule Mix.Tasks.Comgen.Build do
   end
 
   defp process(name, _, _) do
-    Comgen.run(name)
+    Comspec.run(name)
   end
 end

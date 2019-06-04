@@ -5,7 +5,7 @@ alias Comspec.{Event}
 config :comspecs, Account1,
   # meta-data
   spec_name: "Account",
-  spec_shortdoc: "Account comspec",
+  spec_shortdoc: "Account comspec 1",
   spec_doc: nil,
   spec_run_before: nil,
   spec_run_after: nil,

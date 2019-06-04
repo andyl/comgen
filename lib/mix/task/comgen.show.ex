@@ -28,7 +28,7 @@ defmodule Mix.Tasks.Comgen.Show do
 
     Valid comspecs:
 
-    #{Mix.Comgen.help_table()}
+    #{Mix.ComspecConfig.help_table()}
     find comspec source at `config/comspecs/*.exs`
     """
   end
