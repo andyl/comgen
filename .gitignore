@@ -20,9 +20,13 @@ erl_crash.dump
 *.ez
 
 # Ignore package tarball (built via "mix hex.build").
-phoenix_commanded-*.tar
+comgen-*.tar
 
 mix.lock
 
 .elixir_ls/
 /.elixir_ls/
+
+/tmp
+/tmp/
+tmp/

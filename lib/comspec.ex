@@ -27,10 +27,6 @@ defmodule Comspec do
     field(:read_queries, list())
   end
 
-  def hello do
-    "world"
-  end
-
   @doc """
   Run the code generator.
   """
@@ -39,8 +35,6 @@ defmodule Comspec do
     Comspec.Event.build(comspec)
   end
 
-  # -------------------------------------------------------------------
-  
   @doc """
   Return the 'name' for a comspec.
 
@@ -63,19 +57,27 @@ defmodule Comspec do
   """
   def dirname(comspec, type \\ "lib") do
     resource_dir = name(comspec) |> Mix.Comgen.snake()
-    "#{type}/#{resource_dir}"
+    "#{basedir()}#{type}/#{resource_dir}"
   end
 
   @doc """
-  Generates a file from a template.
-  """
-  def gen_file(_comspec, src_file, dest_file) do
-    text =
-      src_file
-      |> File.read()
-      |> elem(1)
-      |> EEx.eval_string([])
+  Base directory for file generation.
 
-    Mix.Generator.create_file(dest_file, text)
+  When MIX_ENV==test, basedir == "tmp/"
+  Otherwise, basedir == ""
+  """
+  def basedir do
+    case Mix.env() do
+      :test -> "tmp/"
+      _ -> ''
+    end
+  end
+
+  @doc """
+  Returns the template directory.
+  """
+  def template_dir do
+    :code.priv_dir(:comgen)
+    |> (&"#{&1}/templates/comgen.build/").()
   end
 end

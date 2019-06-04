@@ -1,7 +1,49 @@
 defmodule ComspecTest do
   use ExUnit.Case
+  import TestHelper
+  import ExUnit.CaptureIO
 
-  test "greets the world" do
-    assert Comspec.hello() == "world"
+  describe "#name" do
+    test "returns a string" do
+      assert [head | _] = ComspecConfig.keys()
+      assert comspec = ComspecConfig.struct_data!(head)
+      assert Comspec.name(comspec)
+    end
   end
+
+  describe "#dirname" do
+    test "returns a string" do
+      assert [head | _] = ComspecConfig.keys()
+      assert comspec = ComspecConfig.struct_data!(head)
+      assert Comspec.dirname(comspec)
+    end
+
+    test "returns a string (type lib)" do
+      assert [head | _] = ComspecConfig.keys()
+      assert comspec = ComspecConfig.struct_data!(head)
+      assert Comspec.dirname(comspec, "lib") == "tmp/lib/accounts"
+    end
+
+    test "returns a string (type test)" do
+      assert [head | _] = ComspecConfig.keys()
+      assert comspec = ComspecConfig.struct_data!(head)
+      assert Comspec.dirname(comspec, "test")
+    end
+  end
+
+  describe "#basedir" do
+    test "gets correct value" do
+      assert Comspec.basedir() == "tmp/"
+    end
+  end
+
+  # describe "#build" do
+  #   setup [:reset_base_dir]
+  #
+  #   test "runs" do
+  #     assert [head | _] = ComspecConfig.keys()
+  #     stdout = capture_io(fn -> Comspec.build(head) end)
+  #     assert stdout
+  #   end
+  # end
 end

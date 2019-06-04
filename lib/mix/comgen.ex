@@ -21,8 +21,12 @@ defmodule Mix.Comgen do
   The name of the read store - the Ecto repo.
   """
   def read_store do
-    Application.get_env(app(), :ecto_repos)
-    |> List.first()
+    list = Application.get_env(app(), :ecto_repos)
+
+    case list do
+      nil -> nil
+      _ -> List.first(list)
+    end
   end
 
   @doc """
@@ -43,19 +47,6 @@ defmodule Mix.Comgen do
   end
 
   @doc """
-  Run a shell command and stream results to stdout.
-  """
-  def shellcmd(cmd, env \\ []) do
-    [base_cmd | args] = String.split(cmd)
-
-    System.cmd(base_cmd, args,
-      env: env,
-      parallelism: false,
-      into: IO.stream(:stdio, :line)
-    )
-  end
-
-  @doc """
   Convert string to snake-case.
   """
   def snake(string) do
@@ -73,9 +64,44 @@ defmodule Mix.Comgen do
     "#{type}/#{app()}/#{dc_name}/#{subdir}"
   end
 
+  @doc """
+  Run a shell command and stream results to stdout.
+  """
+  def shellcmd(cmd, env \\ []) do
+    [base_cmd | args] = String.split(cmd)
+
+    System.cmd(base_cmd, args,
+      env: env,
+      parallelism: false,
+      into: IO.stream(:stdio, :line)
+    )
+  end
+
+  @doc """
+  Generate a directory, unless it already exists.
+  """
   def gen_dir(path) do
-    path
-    |> Mix.Generator.create_directory()
+    unless File.dir?(path) do
+      path
+      |> Mix.Generator.create_directory()
+    end
+  end
+
+  @doc """
+  Generates a file from a template.
+  """
+  def gen_file(src_file, dest_file, ctx \\ []) do
+    IO.puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    IO.inspect src_file
+    IO.inspect dest_file
+    text =
+      src_file
+      |> File.read()
+      |> elem(1)
+      |> IO.inspect()
+      # |> EEx.eval_string(ctx)
+
+    Mix.Generator.create_file(dest_file, text)
   end
 
   @doc false

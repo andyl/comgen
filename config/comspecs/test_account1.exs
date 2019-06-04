@@ -2,7 +2,7 @@ use Mix.Config
 
 config :comgen, Account1,
   # meta-data
-  spec_name: "Account",
+  spec_name: "Accounts",
   spec_shortdoc: "Account comspec 1",
   spec_doc: nil,
   spec_run_before: nil,
