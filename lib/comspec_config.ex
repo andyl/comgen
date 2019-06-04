@@ -57,8 +57,10 @@ defmodule ComspecConfig do
   The comspecs are defined in `config/comspecs/*.exs`.
   """
   def struct_data!(key) do
-    kw_data(key)
+    skey = to_string(key)
+    kw_data(skey)
     |> Enum.reduce(%Comspec{}, fn({key, val}, acc) -> Map.put(acc, key, val) end)
+    |> Map.put(:spec_key, key)
   end
 
   @doc """
@@ -73,7 +75,7 @@ defmodule ComspecConfig do
 
   For use in mix-task help messages.
   """
-  def help_table do
+  def help_table_data do
     string_keys()
     |> Enum.map(&[&1, kw_data(&1)[:spec_shortdoc]])
   end

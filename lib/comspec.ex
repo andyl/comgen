@@ -7,6 +7,7 @@ defmodule Comspec do
 
   typedstruct do
     # meta-data
+    field(:spec_key, String.t())
     field(:spec_name, String.t())
     field(:spec_shortdoc, String.t())
     field(:spec_doc, String.t())
@@ -33,41 +34,44 @@ defmodule Comspec do
     comspec = ComspecConfig.struct_data!(comspec_name)
     Comspec.Event.build(comspec)
   end
+
+  # -------------------------------------------------------------------
   
-  # defp dir_list do
-  #   ~w(aggregate 
-  #      command 
-  #      command/handler command/middleware command/router command/validator 
-  #      event 
-  #      event/handler event/projector 
-  #      read/schema read/query
-  #      saga)
-  # end
+  @doc """
+  Return the 'name' for a comspec.
 
-  # defp gen_all(ctx) do
-  #   gen_dirs(ctx)
-  #   gen_files(ctx)
-  # end
+  The name is the 'resource name'.  (like "Accounts" or "Users")
 
-  # defp gen_dirs(ctx) do
-  #   name = Mix.Comgen.snake(ctx)
-  #
-  #   dir_list()
-  #   |> Enum.each(fn subdir -> gen_dir(name, subdir, "lib") end)
-  #
-  #   dir_list()
-  #   |> Enum.each(fn subdir -> gen_dir(name, subdir, "test") end)
-  # end
+  The default value for name is the key that is used to identify the resource.
+  If a :spec_name is also defined, that will become the name.
 
-  # defp gen_dir(name, subdir, type) do
-  #   Mix.Comgen.ctx_dir(name, subdir, type)
-  #   |> Mix.Generator.create_directory()
-  # end
+  Sometimes it will be handy to create a series of comspecs, where each comspec
+  layers incremental capability to a resource.  In this case, use a series of
+  unique comspec keys (like 'Accounts1', 'Accounts2', etc.), each which use the
+  same :spec_name (like 'Accounts').
+  """
+  def name(comspec) do
+    comspec.spec_name || comspec.spec_key
+  end
 
-  # -----
+  @doc """
+  Returns the directory name for a comspec.
+  """
+  def dirname(comspec, type \\ "lib") do
+    resource_dir = name(comspec) |> Mix.Comgen.snake()
+    "#{type}/#{resource_dir}"
+  end
 
-  # defp gen_files(ctx) do
-  #   Mix.Shell.IO.info("Genctx (UNDER CONSTRUCTION)")
-  #   IO.inspect(ctx)
-  # end
+  @doc """
+  Generates a file from a template.
+  """
+  def gen_file(comspec, src_file, dest_file) do
+    text =
+      src_file
+      |> File.read()
+      |> elem(1)
+      |> EEx.eval_string([])
+
+    Mix.Generator.create_file(dest_file, text)
+  end
 end

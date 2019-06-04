@@ -14,6 +14,10 @@ defmodule Comspec.Event do
     Enum.each(comspec.events, &(build_event(comspec, &1)))
   end
 
+  def dirname(comspec, type \\ "lib") do
+    Comspec.dirname(comspec, type) <> "/events"
+  end
+
   defp build_event(comspec, event) do
     IO.puts "Comspec.Event.build_event --------------------"
     IO.inspect(comspec)

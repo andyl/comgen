@@ -26,6 +26,23 @@ defmodule Mix.Comgen do
   end
 
   @doc """
+  Generate help_table text.
+  """
+  def help_table do
+    render_opts = [
+      horizontal_style: :off,
+      vertical_style: :all,
+      vertical_symbol: "#"
+    ]
+
+    TableRex.Table.new(ComspecConfig.help_table_data())
+    |> TableRex.Table.render!(render_opts)
+    |> String.replace(~r/^# /, "")
+    |> String.replace(~r/ #$/, "")
+    |> String.replace(~r/#\n# /, "\n")
+  end
+
+  @doc """
   Run a shell command and stream results to stdout.
   """
   def shellcmd(cmd, env \\ []) do
@@ -54,6 +71,11 @@ defmodule Mix.Comgen do
   def ctx_dir(ctx_name, subdir, type \\ "lib") do
     dc_name = String.downcase(ctx_name)
     "#{type}/#{app()}/#{dc_name}/#{subdir}"
+  end
+
+  def gen_dir(path) do
+    path
+    |> Mix.Generator.create_directory()
   end
 
   @doc false
