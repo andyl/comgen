@@ -4,16 +4,22 @@ defmodule ComspecConfig do
   """
 
   @doc """
+  Return a config key appropriate for the Mix Environment.
+  """
+  def mix_app do
+    case Mix.env() do
+      :test -> :comgen
+      _ -> :comspecs
+    end
+  end
+
+  @doc """
   Get a list of all defined comspec keys.
 
   The comspecs are defined in `config/comspecs/*.exs`.
   """
   def keys do
-    app_key = case Mix.env() do
-      :test -> :comgen
-      _ -> :comspecs
-    end
-    Application.get_all_env(app_key)
+    Application.get_all_env(mix_app())
     |> Keyword.keys()
     |> Enum.sort()
   end
@@ -31,7 +37,7 @@ defmodule ComspecConfig do
   Key in keys?
   """
   def valid_key?(key) do
-    skey = to_string(key)
+    skey = to_string(key) |> String.replace(~r/Elixir./, "")
     Enum.any?(string_keys(), &(&1 == skey))
   end
 
@@ -41,7 +47,7 @@ defmodule ComspecConfig do
   The comspecs are defined in `config/comspecs/*.exs`.
   """
   def kw_data(key) do
-    Application.get_env(:comspecs, to_module(key))
+    Application.get_env(mix_app(), to_module(key))
   end
 
   @doc """
