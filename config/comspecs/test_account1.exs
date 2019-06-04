@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :comspecs, Account1,
+config :comgen, Account1,
   # meta-data
   spec_name: "Account",
   spec_shortdoc: "Account comspec 1",

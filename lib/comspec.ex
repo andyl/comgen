@@ -69,7 +69,7 @@ defmodule Comspec do
   @doc """
   Generates a file from a template.
   """
-  def gen_file(comspec, src_file, dest_file) do
+  def gen_file(_comspec, src_file, dest_file) do
     text =
       src_file
       |> File.read()

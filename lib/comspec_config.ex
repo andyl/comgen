@@ -9,7 +9,11 @@ defmodule ComspecConfig do
   The comspecs are defined in `config/comspecs/*.exs`.
   """
   def keys do
-    Application.get_all_env(:comspecs)
+    app_key = case Mix.env() do
+      :test -> :comgen
+      _ -> :comspecs
+    end
+    Application.get_all_env(app_key)
     |> Keyword.keys()
     |> Enum.sort()
   end
