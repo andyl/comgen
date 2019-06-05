@@ -3,6 +3,8 @@ defmodule Comspec.Aggregate do
   A struct to handle an Aggregate and generate Aggregate Resources.
   """
 
+  @dirtype "aggregates"
+
   use TypedStruct
   import ComspecUtil
 
@@ -21,7 +23,6 @@ defmodule Comspec.Aggregate do
     |> Enum.each(&Mix.Comgen.gen_dir(&1))
 
     aggregate_annotations(comspec)
-    |> IO.inspect()
     |> Enum.each(&generate_aggregate_files(comspec, &1))
   end
 
@@ -30,7 +31,7 @@ defmodule Comspec.Aggregate do
   """
   def aggregate_directories(comspec) do
     ["lib", "test"]
-    |> Enum.map(&dirname(comspec, &1, "aggregates"))
+    |> Enum.map(&dirname(comspec, &1, @dirtype))
   end
 
   @doc """
@@ -53,11 +54,11 @@ defmodule Comspec.Aggregate do
     %{
       lib: %{
         src: Comspec.template_dir() <> "aggregate.ex",
-        dst: dirname(comspec, "lib") <> "/" <> ev_name <> ".ex"
+        dst: dirname(comspec, "lib", @dirtype) <> "/" <> ev_name <> ".ex"
       },
       test: %{
         src: Comspec.template_dir() <> "aggregate_test.exs",
-        dst: dirname(comspec, "test") <> "/" <> ev_name <> "_test.exs"
+        dst: dirname(comspec, "test", @dirtype) <> "/" <> ev_name <> "_test.exs"
       }
     }
   end

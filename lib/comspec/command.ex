@@ -3,6 +3,8 @@ defmodule Comspec.Command do
   A struct to handle an Command and generate Command Resources.
   """
 
+  @dirtype "commands"
+
   use TypedStruct
   import ComspecUtil
 
@@ -27,7 +29,7 @@ defmodule Comspec.Command do
   """
   def command_directories(comspec) do
     ["lib", "test"]
-    |> Enum.map(&dirname(comspec, &1, "commands"))
+    |> Enum.map(&dirname(comspec, &1, @dirtype))
   end
 
   @doc """
@@ -54,11 +56,11 @@ defmodule Comspec.Command do
     %{
       lib: %{
         src: Comspec.template_dir() <> "command.ex",
-        dst: dirname(comspec, "lib") <> "/" <> ev_name <> ".ex"
+        dst: dirname(comspec, "lib", @dirtype) <> "/" <> ev_name <> ".ex"
       },
       test: %{
         src: Comspec.template_dir() <> "command_test.exs",
-        dst: dirname(comspec, "test") <> "/" <> ev_name <> "_test.exs"
+        dst: dirname(comspec, "test", @dirtype) <> "/" <> ev_name <> "_test.exs"
       }
     }
   end

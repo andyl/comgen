@@ -46,9 +46,13 @@ defmodule PhoenixCommanded.MixProject do
     [
       main: "readme",
       assets: "assets",
+      extra_section: "GUIDES",
       extras: [
-        "README.md"
-      ]
+        "README.md",
+        "guides/developers.md"
+      ],
     ]
   end
+
+
 end

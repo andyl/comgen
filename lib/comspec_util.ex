@@ -13,7 +13,7 @@ defmodule ComspecUtil do
     comspec.spec_name || comspec.spec_key
   end
 
-  def dirname(comspec, type, submodule \\ "") do
+  def dirname(comspec, type, submodule) do
     Comspec.dirname(comspec, type) <> "/" <> submodule
   end
 

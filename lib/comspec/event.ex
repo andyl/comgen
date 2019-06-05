@@ -3,6 +3,8 @@ defmodule Comspec.Event do
   A struct to handle an Event and generate Event Resources.
   """
 
+  @dirtype "events"
+
   use TypedStruct
   import ComspecUtil
 
@@ -27,7 +29,7 @@ defmodule Comspec.Event do
   """
   def event_directories(comspec) do
     ["lib", "test"]
-    |> Enum.map(&dirname(comspec, &1, "events"))
+    |> Enum.map(&dirname(comspec, &1, @dirtype))
   end
 
   @doc """
@@ -53,11 +55,11 @@ defmodule Comspec.Event do
     %{
       lib: %{
         src: Comspec.template_dir() <> "event.ex",
-        dst: dirname(comspec, "lib") <> "/" <> ev_name <> ".ex"
+        dst: dirname(comspec, "lib", @dirtype) <> "/" <> ev_name <> ".ex"
       },
       test: %{
         src: Comspec.template_dir() <> "event_test.exs",
-        dst: dirname(comspec, "test") <> "/" <> ev_name <> "_test.exs"
+        dst: dirname(comspec, "test", @dirtype) <> "/" <> ev_name <> "_test.exs"
       }
     }
   end

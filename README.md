@@ -50,7 +50,7 @@ $ mix deps.get              # get comgen dependencies
 $ mix ecto.create           # create database for read-models
 $ mix comgen.add.config     # add Commanded config w/comspecs
 $ mix comgen.add.estore     # add Commanded event-stores
-$ mix comgen.build Account1 # generate Aggregates, Commands, Events, ...
+$ mix comgen.build Account1 # generate Commanded elements...
 $ mix compile               # compile the generated code
 $ mix test                  # run tests
 $ mix phx.server            # run server
