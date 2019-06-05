@@ -2,7 +2,7 @@ use Mix.Config
 
 alias Comspec.{Event}
 
-config :comspecs, Account1,
+config :comgen, Account1,
   # meta-data
   spec_name: "Accounts",
   spec_shortdoc: "Account comspec 1",

@@ -36,7 +36,8 @@ defmodule Comspec.Event do
     comspec.events
     |> Enum.map(&Map.put(&1, :templates, template_paths(comspec, &1)))
     |> Enum.map(&Map.put(&1, :snake_name, Mix.Comgen.snake(&1.name)))
-    |> Enum.map(&Map.put(&1, :module_name, module_name(comspec, &1)))
+    |> Enum.map(&Map.put(&1, :module_long, module_long(comspec, &1)))
+    |> Enum.map(&Map.put(&1, :module_short, module_short(&1)))
     |> Enum.map(&Map.put(&1, :string_fields, string_fields(&1)))
   end
 
@@ -56,8 +57,12 @@ defmodule Comspec.Event do
     |> Enum.join(", ")
   end
 
-  defp module_name(comspec, event) do
+  defp module_long(comspec, event) do
     "#{Mix.Comgen.app_module()}.#{name(comspec)}.Events.#{event.name}"
+  end
+
+  defp module_short(event) do
+    event.name
   end
 
   defp template_paths(comspec, event) do

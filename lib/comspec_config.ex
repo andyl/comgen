@@ -9,7 +9,7 @@ defmodule ComspecConfig do
   def mix_app do
     case Mix.env() do
       :test -> :comgen
-      _ -> :comspecs
+      _ -> :comgen
     end
   end
 
