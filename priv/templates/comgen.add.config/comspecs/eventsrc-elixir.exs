@@ -5,7 +5,7 @@ use Mix.Config
 
 config :comspecs, EventSourcingElixir,
 
-  spec_name: nil,
+  spec_name: "EseAccounts",
   spec_shortdoc: "Event Sourcing with Elixir",
   spec_doc: nil,
   spec_run_before: nil,

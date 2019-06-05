@@ -4,7 +4,7 @@ alias Comspec.{Event}
 
 config :comspecs, Account1,
   # meta-data
-  spec_name: "Account",
+  spec_name: "Accounts",
   spec_shortdoc: "Account comspec 1",
   spec_doc: nil,
   spec_run_before: nil,
@@ -26,3 +26,32 @@ config :comspecs, Account1,
   process_managers: nil,
   read_schemas: nil,
   read_queries: nil
+
+#   Accounts: %{
+#     aggregate: %{
+#       BankAccount: %{
+#         fields: [:account_number, :balance]
+#       }
+#     },
+#     command: %{
+#       OpenAccount: %{
+#         fields: [:account_number, :initial_balance],
+#         key_field: :account_number
+#       }
+#     },
+#     command_handler: ["NoOpMiddleware"],
+#     command_router: ["BankRouter"],
+#     event_projector: ["ExampleProjector"],
+#     read: %{
+#       fields: ~w(name:string balance:integer)
+#     },
+#     saga: %{
+#       TransferMoneyProcessManager: %{
+#         fields: [:transfer_uuid, :debit_account, :credit_account, :amount, :status]
+#       }
+#     }
+#   }
+#   }
+# }
+#
+# config :commanded, comspec: comspec

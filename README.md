@@ -12,7 +12,7 @@ Commanded tooling directly.
 We will explore how to generate a Commanded app from a data-structure like
 [GraphQL SDL][sdl]. (our data-structure is called a `comspec`)  
 
-Find our `comspec` template at `priv/templates/comgen.add.config/comspec.exs`
+Find `comspec` templates at `priv/templates/comgen.add.config/comspecs/*.exs`
 (you'll see it's a work-in-progress...)
 
 I'll slowly chip away at this, and welcome collaborators and PRs.  Chat about
@@ -48,9 +48,9 @@ Then run mix commands to configure your app and generate code.
 
 ```
 $ mix deps.get
-$ mix comgen.add.config   # add Commanded config w/comspec
-$ mix comgen.add.estore   # add Commanded event-stores
-$ mix comgen.build Demo   # generate Aggregates, Commands, Events, ...
+$ mix comgen.add.config     # add Commanded config w/comspec
+$ mix comgen.add.estore     # add Commanded event-stores
+$ mix comgen.build Account1 # generate Aggregates, Commands, Events, ...
 ```
 
 At this point, you'll have a set of generated directories and source files.
