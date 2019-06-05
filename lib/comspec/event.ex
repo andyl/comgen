@@ -52,12 +52,12 @@ defmodule Comspec.Event do
 
   defp string_fields(event) do
     event.fields
-    |> Enum.map(&(":#{to_string(&1)}")) 
+    |> Enum.map(&":#{to_string(&1)}")
     |> Enum.join(", ")
   end
 
   defp module_name(comspec, event) do
-    "#{name(comspec)}.Events.#{event.name}"
+    "#{Mix.Comgen.app_module()}.#{name(comspec)}.Events.#{event.name}"
   end
 
   defp template_paths(comspec, event) do
@@ -79,8 +79,8 @@ defmodule Comspec.Event do
     case type do
       {:lib, :src} -> Comspec.template_dir() <> "event.ex"
       {:lib, :dest} -> dirname(comspec, "lib") <> "/" <> ev_name <> ".ex"
-      {:test, :src} -> Comspec.template_dir() <> "event_test.ex"
-      {:test, :dest} -> dirname(comspec, "test") <> "/" <> ev_name <> "_test.ex"
+      {:test, :src} -> Comspec.template_dir() <> "event_test.exs"
+      {:test, :dest} -> dirname(comspec, "test") <> "/" <> ev_name <> "_test.exs"
     end
   end
 

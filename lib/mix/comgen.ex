@@ -11,6 +11,15 @@ defmodule Mix.Comgen do
   end
 
   @doc """
+  The project module.
+  """
+  def app_module do
+    app()
+    |> to_string()
+    |> Macro.camelize()
+  end
+
+  @doc """
   The Mix environment - :dev, :test or :prod
   """
   def env do

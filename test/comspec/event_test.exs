@@ -11,8 +11,8 @@ defmodule Comspec.EventTest do
   describe "#event_directories" do
     test "generates correct paths", ctx do
       [lib_dir, test_dir] = Comspec.Event.event_directories(ctx[:comspec])
-      assert String.contains?(lib_dir, "lib/accounts/events")
-      assert String.contains?(test_dir, "test/accounts/events")
+      assert String.contains?(lib_dir, "lib/comgen/accounts/events")
+      assert String.contains?(test_dir, "test/comgen/accounts/events")
     end
   end
 

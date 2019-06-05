@@ -49,15 +49,18 @@ defmodule Comspec do
   same :spec_name (like 'Accounts').
   """
   def name(comspec) do
-    comspec.spec_name || comspec.spec_key
+    # spec_name is manually (optionally) supplied
+    # spec_key is the config key
+    to_string(comspec.spec_name || comspec.spec_key)
   end
 
   @doc """
   Returns the directory name for a comspec.
   """
   def dirname(comspec, type \\ "lib") do
-    resource_dir = name(comspec) |> Mix.Comgen.snake()
-    "#{basedir()}#{type}/#{resource_dir}"
+    res_dir = name(comspec) |> Mix.Comgen.snake()
+    app_dir = Mix.Comgen.app() |> to_string()
+    "#{basedir()}#{type}/#{app_dir}/#{res_dir}"
   end
 
   @doc """
