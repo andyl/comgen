@@ -7,7 +7,7 @@ config :commanded,
   event_store_adapter: Commanded.EventStore.Adapters.EventStore
 
 config :commanded_ecto_projections,
-  repo: <%= Mix.Phxcom.read_store() %>
+  repo: <%= Mix.Comgen.read_store() %>
 
 config :eventstore,
   column_data_type: "jsonb"
@@ -22,4 +22,4 @@ config :eventstore, EventStore.Storage,
   pool_size: 10,
   pool_overflow: 5
 
-import_config("comspec.exs")
+import_config("comspecs/*.exs")
