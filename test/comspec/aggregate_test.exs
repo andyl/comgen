@@ -59,7 +59,9 @@ defmodule Comspec.AggregateTest do
 
       refute File.exists?(paths.lib.dst)
       refute File.exists?(paths.test.dst)
-      capture_io(fn -> Comspec.Aggregate.build_aggregates(ctx[:comspec]) end)
+      run = fn -> Comspec.Aggregate.build_aggregates(ctx[:comspec]) end
+      run.()
+      # capture_io(run)
       assert File.exists?(paths.lib.dst)
       assert File.exists?(paths.test.dst)
     end
