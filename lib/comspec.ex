@@ -33,6 +33,7 @@ defmodule Comspec do
   def build(comspec_name) do
     comspec = ComspecConfig.struct_data!(comspec_name)
     Comspec.Event.build_events(comspec)
+    Comspec.Aggregate.build_aggregates(comspec)
   end
 
   @doc """

@@ -10,7 +10,9 @@ config :comgen, Account1,
   spec_run_before: nil,
   spec_run_after: nil,
   # specification
-  aggregates: nil,
+  aggregates: [
+    %{name: "Account", fields: [:uuid, :current_balance]}
+  ],
   commands: nil,
   command_handlers: nil,
   command_routers: nil,

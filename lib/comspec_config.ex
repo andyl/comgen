@@ -1,6 +1,6 @@
 defmodule ComspecConfig do
   @moduledoc """
-  List and select from the set of comspecs defined in `config/comspecs/*.exs`.
+  Utilities to manage the collection of comspecs defined in `config/comspecs/*.exs`.
   """
 
   @doc """
