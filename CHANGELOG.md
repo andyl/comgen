@@ -2,10 +2,15 @@
 
 ## [Unreleased]
 
-- Generate working Commands, Aggregates, Events
-- Generate working tests
+- Generate working commands and aggregates
 
-## [0.0.2] - 2019-05-30
+## [0.0.2] - 2019-05-04
+
+- Add event generation
+- Add support for multiple comspecs
+- Add tests
+
+## [0.0.2] - 2019-05-31
 
 - Change to an API-only Phoenix app
 

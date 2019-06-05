@@ -6,6 +6,14 @@ defmodule Comspec do
   use TypedStruct
 
   typedstruct do
+    # meta-data
+    field(:spec_key, String.t())
+    field(:spec_name, String.t())
+    field(:spec_shortdoc, String.t())
+    field(:spec_doc, String.t())
+    field(:spec_run_before, list())
+    field(:spec_run_after, list())
+    # specification
     field(:aggregates, list())
     field(:commands, list())
     field(:command_handlers, list())
@@ -17,13 +25,59 @@ defmodule Comspec do
     field(:process_managers, list())
     field(:read_schemas, list())
     field(:read_queries, list())
-    field(:spec_name, String.t())
-    field(:spec_doc, String.t())
-    field(:spec_run_before, list())
-    field(:spec_run_after, list())
   end
 
-  def run(spec \\ %Comspec{}) do
-    IO.inspect(spec)
+  @doc """
+  Run the code generator.
+  """
+  def build(comspec_name) do
+    comspec = ComspecConfig.struct_data!(comspec_name)
+    Comspec.Event.build_events(comspec)
+  end
+
+  @doc """
+  Return the 'name' for a comspec.
+
+  The name is the 'resource name'.  (like "Accounts" or "Users")
+
+  The default value for name is the key that is used to identify the resource.
+  If a :spec_name is also defined, that will become the name.
+
+  Sometimes it will be handy to create a series of comspecs, where each comspec
+  layers incremental capability to a resource.  In this case, use a series of
+  unique comspec keys (like 'Accounts1', 'Accounts2', etc.), each which use the
+  same :spec_name (like 'Accounts').
+  """
+  def name(comspec) do
+    comspec.spec_name || comspec.spec_key
+  end
+
+  @doc """
+  Returns the directory name for a comspec.
+  """
+  def dirname(comspec, type \\ "lib") do
+    resource_dir = name(comspec) |> Mix.Comgen.snake()
+    "#{basedir()}#{type}/#{resource_dir}"
+  end
+
+  @doc """
+  Base directory for file generation.
+
+  When MIX_ENV==test, basedir == "tmp/"
+  Otherwise, basedir == ""
+  """
+  def basedir do
+    case Mix.env() do
+      :test -> "tmp/"
+      _ -> ''
+    end
+  end
+
+  @doc """
+  Returns the template directory.
+  """
+  def template_dir do
+    :code.priv_dir(:comgen)
+    |> (&"#{&1}/templates/comgen.build/").()
   end
 end

@@ -21,42 +21,29 @@ defmodule Mix.Comgen do
   The name of the read store - the Ecto repo.
   """
   def read_store do
-    Application.get_env(app(), :ecto_repos)
-    |> List.first()
-  end
+    list = Application.get_env(app(), :ecto_repos)
 
-  @doc false
-  def taskname do
-    __MODULE__
-    |> Mix.Task.task_name()
-  end
-
-  @doc """
-  Run a shell command and stream results to stdout.
-  """
-  def shellcmd(cmd, env \\ []) do
-    [base_cmd | args] = String.split(cmd)
-
-    System.cmd(base_cmd, args,
-      env: env,
-      parallelism: false,
-      into: IO.stream(:stdio, :line)
-    )
+    case list do
+      nil -> nil
+      _ -> List.first(list)
+    end
   end
 
   @doc """
-  The comspec holds a map with a separate key for each context.
-
-  The comspec is defined in `config/commanded.exs`.
+  Generate help_table text.
   """
-  def comspec do
-    Application.get_env(:comspec, :comspec)
-  end
+  def help_table do
+    render_opts = [
+      horizontal_style: :off,
+      vertical_style: :all,
+      vertical_symbol: "#"
+    ]
 
-  @doc false
-  def contexts do
-    Map.keys(comspec())
-    |> Enum.map(&Atom.to_string(&1))
+    TableRex.Table.new(ComspecConfig.help_table_data())
+    |> TableRex.Table.render!(render_opts)
+    |> String.replace(~r/^# /, "")
+    |> String.replace(~r/ #$/, "")
+    |> String.replace(~r/#\n# /, "\n")
   end
 
   @doc """
@@ -75,6 +62,42 @@ defmodule Mix.Comgen do
   def ctx_dir(ctx_name, subdir, type \\ "lib") do
     dc_name = String.downcase(ctx_name)
     "#{type}/#{app()}/#{dc_name}/#{subdir}"
+  end
+
+  @doc """
+  Run a shell command and stream results to stdout.
+  """
+  def shellcmd(cmd, env \\ []) do
+    [base_cmd | args] = String.split(cmd)
+
+    System.cmd(base_cmd, args,
+      env: env,
+      parallelism: false,
+      into: IO.stream(:stdio, :line)
+    )
+  end
+
+  @doc """
+  Generate a directory, unless it already exists.
+  """
+  def gen_dir(path) do
+    unless File.dir?(path) do
+      path
+      |> Mix.Generator.create_directory()
+    end
+  end
+
+  @doc """
+  Generates a file from a template.
+  """
+  def gen_file(src_file, dest_file, ctx \\ []) do
+    text =
+      src_file
+      |> File.read()
+      |> elem(1)
+      |> EEx.eval_string(ctx)
+
+    Mix.Generator.create_file(dest_file, text)
   end
 
   @doc false

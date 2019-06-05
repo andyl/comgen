@@ -1,27 +1,32 @@
 use Mix.Config
 
-# This comspec is inspired by the series "Event Sourcing with Elixir" by Bruno
-# Antunes.  https://blog.nootch.net/post/event-sourcing-with-elixir/
-#
+alias Comspec.{Event}
 
-config :comspecs, EventSourcingElixir,
+config :comspecs, Account1,
+  # meta-data
+  spec_name: "Accounts",
+  spec_shortdoc: "Account comspec 1",
+  spec_doc: nil,
+  spec_run_before: nil,
+  spec_run_after: nil,
+  # specification
   aggregates: nil,
   commands: nil,
   command_handlers: nil,
   command_routers: nil,
   command_validators: nil,
-  events: nil,
+  events: [
+    %{name: "AccountOpened", fields: [:account_number, :initial_balance]},
+    %{name: "AccountClosed", fields: [:account_number]},
+    %{name: "AccountCredited", fields: [:account_number, :amount]},
+    %{name: "AccountDebited", fields: [:account_number, :amount]}
+  ],
   event_handlers: nil,
   event_projectors: nil,
   process_managers: nil,
-  read: nil,
-  spec_name: nil,
-  spec_doc: nil,
-  spec_run_before: nil,
-  spec_run_after: nil
+  read_schemas: nil,
+  read_queries: nil
 
-
-# comspec = %{
 #   Accounts: %{
 #     aggregate: %{
 #       BankAccount: %{
@@ -36,9 +41,6 @@ config :comspecs, EventSourcingElixir,
 #     },
 #     command_handler: ["NoOpMiddleware"],
 #     command_router: ["BankRouter"],
-#     event: %{
-#       BankAccountOpened: [:account_number, :initial_balance]
-#     },
 #     event_projector: ["ExampleProjector"],
 #     read: %{
 #       fields: ~w(name:string balance:integer)
@@ -48,13 +50,7 @@ config :comspecs, EventSourcingElixir,
 #         fields: [:transfer_uuid, :debit_account, :credit_account, :amount, :status]
 #       }
 #     }
-#   },
-#   Users: %{
-#     aggregate: [],
-#     command: [],
-#     event: [],
-#     read: [],
-#     saga: []
+#   }
 #   }
 # }
 #

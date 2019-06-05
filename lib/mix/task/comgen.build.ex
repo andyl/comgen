@@ -16,46 +16,33 @@ defmodule Mix.Tasks.Comgen.Build do
 
   @doc false
   def run(args) do
-    IO.inspect(args)
-    [_name | _opts] = String.split(args)
+    case args do
+      [] -> IO.puts(usage_msg())
+      [name | opts] -> process(name, opts, ComspecConfig.valid_key?(name))
+    end
   end
 
-  # -----
+  defp usage_msg do
+    """
+    Usage: mix comgen.build <COMSPEC>
 
-  # defp dir_list do
-  #   ~w(aggregate 
-  #      command 
-  #      command/handler command/middleware command/router command/validator 
-  #      event 
-  #      event/handler event/projector 
-  #      read/schema read/query
-  #      saga)
-  # end
+    Valid comspecs:
 
-  # defp gen_all(ctx) do
-  #   gen_dirs(ctx)
-  #   gen_files(ctx)
-  # end
+    #{Mix.Comgen.help_table()}
+    show comspec definition with `mix comgen.show <COMSPEC>`
+    find comspec source at `config/comspecs/*.exs`
+    """
+  end
 
-  # defp gen_dirs(ctx) do
-  #   name = Mix.Comgen.snake(ctx)
-  #
-  #   dir_list()
-  #   |> Enum.each(fn subdir -> gen_dir(name, subdir, "lib") end)
-  #
-  #   dir_list()
-  #   |> Enum.each(fn subdir -> gen_dir(name, subdir, "test") end)
-  # end
+  defp process(name, _, valid_name?) when valid_name? == false do
+    """
+    Error: unrecognized comspec name (#{name})
+    #{usage_msg()}
+    """
+    |> IO.puts()
+  end
 
-  # defp gen_dir(name, subdir, type) do
-  #   Mix.Comgen.ctx_dir(name, subdir, type)
-  #   |> Mix.Generator.create_directory()
-  # end
-
-  # -----
-
-  # defp gen_files(ctx) do
-  #   Mix.Shell.IO.info("Genctx (UNDER CONSTRUCTION)")
-  #   IO.inspect(ctx)
-  # end
+  defp process(name, _, _) do
+    Comspec.build(name)
+  end
 end
