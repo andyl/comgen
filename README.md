@@ -47,20 +47,14 @@ end
 Then run mix commands to configure your app and generate code.
 
 ```
-$ mix deps.get
+$ mix deps.get              # get comgen dependencies
+$ mix ecto.create           # create Database from read-models
 $ mix comgen.add.config     # add Commanded config w/comspec
 $ mix comgen.add.estore     # add Commanded event-stores
 $ mix comgen.build Account1 # generate Aggregates, Commands, Events, ...
-```
-
-At this point, you'll have a set of generated directories and source files.
-You'll have to manually fill out the code stubs, then you can compile and run
-your application.
-
-```
-$ mix compile             # compile the generated code
-$ mix ecto.setup          # setup read-store
-$ mix phx.server          # run server
+$ mix compile               # compile the generated code
+$ mix test                  # run tests
+$ mix tex.server            # run server
 ```
 
 In another terminal view your API endpoints with `$ mix phx.routes`.
