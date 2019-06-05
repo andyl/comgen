@@ -1,6 +1,6 @@
 defmodule Comspec.Event do
   @moduledoc """
-  A struct to handle an Event.
+  A struct to handle an Event and generate Event Resources.
   """
 
   use TypedStruct
@@ -11,51 +11,84 @@ defmodule Comspec.Event do
   end
 
   @doc """
-  Build the code and test cases for Events
+  Build the directories, code and test cases for Events
   """
-  def build(comspec) do
-    # generate lib and test directories
-    ["lib", "test"]
-    |> Enum.map(&dirname(comspec, &1))
+  def build_events(comspec) do
+    event_directories(comspec)
     |> Enum.each(&Mix.Comgen.gen_dir(&1))
 
-    Enum.each(comspec.events, &build_event(comspec, &1))
+    event_filepaths(comspec)
+    |> Enum.each(&generate_event_files(comspec, &1))
   end
 
   @doc """
-  Directory name for event struct.
+  Return a list of generated directories for the event.
   """
-  def dirname(comspec, type \\ "lib") do
+  def event_directories(comspec) do
+    ["lib", "test"]
+    |> Enum.map(&dirname(comspec, &1))
+  end
+
+  @doc """
+  Add path data for template input/output files to each event.
+  """
+  def event_filepaths(comspec) do
+    comspec.events
+    |> Enum.map(&Map.put(&1, :templates, template_paths(comspec, &1)))
+    |> Enum.map(&Map.put(&1, :snake_name, Mix.Comgen.snake(&1.name)))
+    |> Enum.map(&Map.put(&1, :module_name, module_name(comspec, &1)))
+    |> Enum.map(&Map.put(&1, :string_fields, string_fields(&1)))
+  end
+
+  # --------------------------------------------------------- 
+
+  defp name(comspec) do
+    comspec.spec_name || comspec.spec_key
+  end
+
+  defp dirname(comspec, type) do
     Comspec.dirname(comspec, type) <> "/events"
   end
 
-  @doc """
-  Event name.
-  """
-  def name(event) do
-    event.name 
+  defp string_fields(event) do
+    event.fields
+    |> Enum.map(&(":#{to_string(&1)}")) 
+    |> Enum.join(", ")
   end
 
-  defp build_event(comspec, event) do
-    context = [comspec: comspec, event: event]
+  defp module_name(comspec, event) do
+    "#{name(comspec)}.Events.#{event.name}"
+  end
+
+  defp template_paths(comspec, event) do
+    %{
+      lib: %{
+        src: path_for(comspec, event, {:lib, :src}),
+        dest: path_for(comspec, event, {:lib, :dest})
+      },
+      test: %{
+        src: path_for(comspec, event, {:test, :src}),
+        dest: path_for(comspec, event, {:test, :dest})
+      }
+    }
+  end
+
+  defp path_for(comspec, event, type) do
     ev_name = Mix.Comgen.snake(event[:name])
 
-    IO.inspect ev_name
-
-    # write code files
-    with src_file <- Comspec.template_dir() <> "/event.ex",
-         dest_file <- dirname(comspec, "lib") <> ev_name <> ".ex" do
-      IO.puts "============================================================="
-      IO.inspect src_file
-      IO.inspect dest_file
-      Mix.Comgen.gen_file(src_file, dest_file, context)
+    case type do
+      {:lib, :src} -> Comspec.template_dir() <> "event.ex"
+      {:lib, :dest} -> dirname(comspec, "lib") <> "/" <> ev_name <> ".ex"
+      {:test, :src} -> Comspec.template_dir() <> "event_test.ex"
+      {:test, :dest} -> dirname(comspec, "test") <> "/" <> ev_name <> "_test.ex"
     end
-
-    # write test files
-    # with src_file <- Comspec.template_dir() <> "/event_test.ex",
-    #      dest_file <- dirname(comspec, "test") <> ev_name <> ".ex" do
-    #   Mix.Comgen.gen_file(src_file, dest_file, context)
-    # end
   end
 
+  defp generate_event_files(comspec, event) do
+    context = [comspec: comspec, event: event]
+    paths = event[:templates]
+
+    Mix.Comgen.gen_file(paths.lib.src, paths.lib.dest, context)
+    Mix.Comgen.gen_file(paths.test.src, paths.test.dest, context)
+  end
 end

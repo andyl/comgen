@@ -1,6 +1,5 @@
 defmodule Mix.ComgenTest do
   use ExUnit.Case
-  import TestHelper
   import ExUnit.CaptureIO
 
   describe "#app" do
@@ -34,8 +33,6 @@ defmodule Mix.ComgenTest do
   end
 
   describe "#gen_dir" do
-    setup [:reset_base_dir]
-
     test "generate a basic directory" do
       dirpath = "tmp/test/asdf"
       refute File.dir?(dirpath)

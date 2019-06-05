@@ -91,15 +91,11 @@ defmodule Mix.Comgen do
   Generates a file from a template.
   """
   def gen_file(src_file, dest_file, ctx \\ []) do
-    IO.puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-    IO.inspect src_file
-    IO.inspect dest_file
     text =
       src_file
       |> File.read()
       |> elem(1)
-      |> IO.inspect()
-      # |> EEx.eval_string(ctx)
+      |> EEx.eval_string(ctx)
 
     Mix.Generator.create_file(dest_file, text)
   end

@@ -1,7 +1,5 @@
 defmodule ComspecTest do
   use ExUnit.Case
-  import TestHelper
-  import ExUnit.CaptureIO
 
   describe "#name" do
     test "returns a string" do
@@ -36,14 +34,4 @@ defmodule ComspecTest do
       assert Comspec.basedir() == "tmp/"
     end
   end
-
-  # describe "#build" do
-  #   setup [:reset_base_dir]
-  #
-  #   test "runs" do
-  #     assert [head | _] = ComspecConfig.keys()
-  #     stdout = capture_io(fn -> Comspec.build(head) end)
-  #     assert stdout
-  #   end
-  # end
 end

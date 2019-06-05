@@ -1,2 +1,5 @@
-# event_test.ex
-# UNDER CONSTRUCTION
+# <%= event.templates.test.dest%>
+defmodule <%= event.module_name %>Test do
+  use ExUnit.Case
+
+end
