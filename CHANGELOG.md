@@ -5,11 +5,11 @@
 - Add API module with command functions
 - Add tests to drive end-to-end from command to event-store
 
-## [0.0.4] - 2019-05-05
+## [0.0.4] - 2019-06-05
 
 - Add support for commands and aggregates
 
-## [0.0.3] - 2019-05-04
+## [0.0.3] - 2019-06-04
 
 - Add event generation
 - Add support for multiple comspecs
