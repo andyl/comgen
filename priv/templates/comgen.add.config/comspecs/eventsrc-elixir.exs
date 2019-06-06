@@ -3,7 +3,7 @@ use Mix.Config
 # This comspec is inspired by the series "Event Sourcing with Elixir" by Bruno
 # Antunes.  https://blog.nootch.net/post/event-sourcing-with-elixir/
 
-config :comspecs, EventSourcingElixir,
+config :comgen, EventSourcingElixir,
 
   spec_name: "EseAccounts",
   spec_shortdoc: "Event Sourcing with Elixir",

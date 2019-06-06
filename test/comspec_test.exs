@@ -19,7 +19,7 @@ defmodule ComspecTest do
     test "returns a string (type lib)" do
       assert [head | _] = ComspecConfig.keys()
       assert comspec = ComspecConfig.struct_data!(head)
-      assert Comspec.dirname(comspec, "lib") == "tmp/lib/accounts"
+      assert Comspec.dirname(comspec, "lib") == "tmp/lib/comgen/accounts"
     end
 
     test "returns a string (type test)" do

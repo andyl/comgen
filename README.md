@@ -38,29 +38,22 @@ dependencies in `my_app/mix.exs`:
 ```elixir
 def deps do
   [
-    {...},
     {:comgen, git: "https://github.com/andyl/comgen"},
   ]
 end
 ```
 
-Then run mix commands to configure your app and generate code.
+Run mix commands to configure your app and generate code.
 
 ```
-$ mix deps.get
-$ mix comgen.add.config     # add Commanded config w/comspec
+$ mix deps.get              # get comgen dependencies
+$ mix ecto.create           # create database for read-models
+$ mix comgen.add.config     # add Commanded config w/comspecs
 $ mix comgen.add.estore     # add Commanded event-stores
-$ mix comgen.build Account1 # generate Aggregates, Commands, Events, ...
-```
-
-At this point, you'll have a set of generated directories and source files.
-You'll have to manually fill out the code stubs, then you can compile and run
-your application.
-
-```
-$ mix compile             # compile the generated code
-$ mix ecto.setup          # setup read-store
-$ mix phx.server          # run server
+$ mix comgen.build Account1 # generate Commanded elements...
+$ mix compile               # compile the generated code
+$ mix test                  # run tests
+$ mix phx.server            # run server
 ```
 
 In another terminal view your API endpoints with `$ mix phx.routes`.
@@ -102,13 +95,4 @@ Each generated context will contain a standard set of Commanded elements.
 Here's how the Commanded elements flow together...
 
 ![CommandedElements](assets/CommandedElements.jpg)
-
-## Design Notes
-
-Database: We use Postgres for the Event Store, for `:dev`, `:prod` and `:test`
-
-Context API: We generate the same API interface as is used by the standard
-Phoenix/Ecto generators.  Your Commanded contexts should be interoperable with
-a Phoenix-generated context, and should work seamlessly with Phoenix-generated
-views.
 

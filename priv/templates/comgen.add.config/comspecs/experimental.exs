@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :comspecs, Experimental,
+config :comgen, Experimental,
   spec_name: ExAccounts,
   spec_shortdoc: "Experimental comspec",
   spec_doc: nil,

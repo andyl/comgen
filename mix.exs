@@ -1,7 +1,7 @@
 defmodule PhoenixCommanded.MixProject do
   use Mix.Project
 
-  defp version, do: "0.0.3"
+  defp version, do: "0.0.4"
 
   defp deps do
     when_configured = Application.get_all_env(:commanded) != []
@@ -46,9 +46,13 @@ defmodule PhoenixCommanded.MixProject do
     [
       main: "readme",
       assets: "assets",
+      extra_section: "GUIDES",
       extras: [
-        "README.md"
-      ]
+        "README.md",
+        "guides/roadmap.md"
+      ],
     ]
   end
+
+
 end

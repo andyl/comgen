@@ -1,4 +1,4 @@
-defmodule Comspec.EventTest do
+defmodule Comspec.AggregateTest do
   use ExUnit.Case
   import TestHelper
   import ExUnit.CaptureIO
@@ -8,21 +8,21 @@ defmodule Comspec.EventTest do
     [comspec: ComspecConfig.struct_data!(comspec_name)]
   end
 
-  describe "#event_directories" do
+  describe "#aggregate_directories" do
     test "generates correct paths", ctx do
-      [lib_dir, test_dir] = Comspec.Event.event_directories(ctx[:comspec])
-      assert String.contains?(lib_dir, "lib/comgen/accounts/events")
-      assert String.contains?(test_dir, "test/comgen/accounts/events")
+      [lib_dir, test_dir] = Comspec.Aggregate.aggregate_directories(ctx[:comspec])
+      assert String.contains?(lib_dir, "lib/comgen/accounts/aggregates")
+      assert String.contains?(test_dir, "test/comgen/accounts/aggregates")
     end
   end
 
-  describe "#event_annotations" do
+  describe "#aggregate_annotations" do
     test "runs w/o exception", ctx do
-      assert [_ | _] = Comspec.Event.event_annotations(ctx[:comspec])
+      assert [_ | _] = Comspec.Aggregate.aggregate_annotations(ctx[:comspec])
     end
 
-    test "contains event elements", ctx do
-      [head | _] = Comspec.Event.event_annotations(ctx[:comspec])
+    test "contains aggregate elements", ctx do
+      [head | _] = Comspec.Aggregate.aggregate_annotations(ctx[:comspec])
       assert head[:name]
       assert head[:fields]
       assert head[:templates]
@@ -35,30 +35,33 @@ defmodule Comspec.EventTest do
     end
   end
 
-  describe "#build_events" do
+  describe "#build_aggregates" do
     setup [:reset_base_dir]
 
     test "basic operation", ctx do
-      stdout = capture_io(fn -> Comspec.Event.build_events(ctx[:comspec]) end)
-      assert stdout 
+      stdout = capture_io(fn -> Comspec.Aggregate.build_aggregates(ctx[:comspec]) end)
+      assert stdout
     end
 
     test "directory generation", ctx do
-      [lib_dir, test_dir] = Comspec.Event.event_directories(ctx[:comspec]) 
+      [lib_dir, test_dir] = Comspec.Aggregate.aggregate_directories(ctx[:comspec])
       refute File.dir?(lib_dir)
       refute File.dir?(test_dir)
-      capture_io(fn -> Comspec.Event.build_events(ctx[:comspec]) end)
+      run = fn -> Comspec.Aggregate.build_aggregates(ctx[:comspec]) end
+      capture_io(run)
       assert File.dir?(lib_dir)
       assert File.dir?(test_dir)
     end
 
     test "file creation", ctx do
-      [event|_] = Comspec.Event.event_annotations(ctx[:comspec])
-      paths = event.templates
+      [aggregate | _] = Comspec.Aggregate.aggregate_annotations(ctx[:comspec])
+      paths = aggregate.templates
 
       refute File.exists?(paths.lib.dst)
       refute File.exists?(paths.test.dst)
-      capture_io(fn -> Comspec.Event.build_events(ctx[:comspec]) end)
+      run = fn -> Comspec.Aggregate.build_aggregates(ctx[:comspec]) end
+      # run.()
+      capture_io(run)
       assert File.exists?(paths.lib.dst)
       assert File.exists?(paths.test.dst)
     end

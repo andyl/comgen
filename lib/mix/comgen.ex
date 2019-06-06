@@ -1,6 +1,6 @@
 defmodule Mix.Comgen do
   @moduledoc """
-  This module has helper utilities for use within mix tasks.
+  This module has helper utilities for use by generators and within mix tasks.
   """
 
   @doc """
@@ -8,6 +8,15 @@ defmodule Mix.Comgen do
   """
   def app do
     Mix.Project.config()[:app]
+  end
+
+  @doc """
+  The project module.
+  """
+  def app_module do
+    app()
+    |> to_string()
+    |> Macro.camelize()
   end
 
   @doc """
@@ -90,14 +99,14 @@ defmodule Mix.Comgen do
   @doc """
   Generates a file from a template.
   """
-  def gen_file(src_file, dest_file, ctx \\ []) do
+  def gen_file(src_file, dst_file, ctx \\ []) do
     text =
       src_file
       |> File.read()
       |> elem(1)
       |> EEx.eval_string(ctx)
 
-    Mix.Generator.create_file(dest_file, text)
+    Mix.Generator.create_file(dst_file, text)
   end
 
   @doc false

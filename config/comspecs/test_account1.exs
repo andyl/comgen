@@ -8,8 +8,15 @@ config :comgen, Account1,
   spec_run_before: nil,
   spec_run_after: nil,
   # specification
-  aggregates: nil,
-  commands: nil,
+  aggregates: [
+    %{name: "Account", fields: [:uuid, :current_balance]}
+  ],
+  commands: [
+    %{name: "OpenAccount", fields: [:account_number, :initial_balance]},
+    %{name: "CloseAccount", fields: [:account_number]},
+    %{name: "CreditAccount", fields: [:account_number, :amount]},
+    %{name: "DebitAccount", fields: [:account_number, :amount]}
+  ],
   command_handlers: nil,
   command_routers: nil,
   command_validators: nil,
