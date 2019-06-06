@@ -4,6 +4,7 @@ defmodule Comspec.Aggregate do
   """
 
   @dirtype "aggregates"
+  @modtype "Aggregates"
 
   use TypedStruct
   import ComspecUtil
@@ -41,7 +42,7 @@ defmodule Comspec.Aggregate do
     comspec.aggregates
     |> Enum.map(&Map.put(&1, :templates, template_paths(comspec, &1)))
     |> Enum.map(&Map.put(&1, :snake_name, Mix.Comgen.snake(&1.name)))
-    |> Enum.map(&Map.put(&1, :module_long, module_long(comspec, &1)))
+    |> Enum.map(&Map.put(&1, :module_long, module_long(comspec, &1, @modtype)))
     |> Enum.map(&Map.put(&1, :module_short, module_short(&1)))
     |> Enum.map(&Map.put(&1, :string_fields, string_fields(&1)))
   end

@@ -23,8 +23,8 @@ defmodule ComspecUtil do
     |> Enum.join(", ")
   end
 
-  def module_long(comspec, submodule) do
-    "#{Mix.Comgen.app_module()}.#{name(comspec)}.submodules.#{submodule.name}"
+  def module_long(comspec, submodule, modtype) do
+    "#{Mix.Comgen.app_module()}.#{name(comspec)}.#{modtype}.#{submodule.name}"
   end
 
   def module_short(submodule) do

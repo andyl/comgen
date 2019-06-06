@@ -13,7 +13,12 @@ config :comgen, Account1,
   aggregates: [
     %{name: "Account", fields: [:uuid, :current_balance]}
   ],
-  commands: nil,
+  commands: [
+    %{name: "OpenAccount", fields: [:account_number, :initial_balance]},
+    %{name: "CloseAccount", fields: [:account_number]},
+    %{name: "CreditAccount", fields: [:account_number, :amount]},
+    %{name: "DebitAccount", fields: [:account_number, :amount]}
+  ],
   command_handlers: nil,
   command_routers: nil,
   command_validators: nil,

@@ -14,7 +14,7 @@ defmodule Comspec.AggregateTest do
       assert String.contains?(lib_dir, "lib/comgen/accounts/aggregates")
       assert String.contains?(test_dir, "test/comgen/accounts/aggregates")
     end
-  end 
+  end
 
   describe "#aggregate_annotations" do
     test "runs w/o exception", ctx do
@@ -44,7 +44,7 @@ defmodule Comspec.AggregateTest do
     end
 
     test "directory generation", ctx do
-      [lib_dir, test_dir] = Comspec.Aggregate.aggregate_directories(ctx[:comspec]) 
+      [lib_dir, test_dir] = Comspec.Aggregate.aggregate_directories(ctx[:comspec])
       refute File.dir?(lib_dir)
       refute File.dir?(test_dir)
       run = fn -> Comspec.Aggregate.build_aggregates(ctx[:comspec]) end
@@ -54,14 +54,14 @@ defmodule Comspec.AggregateTest do
     end
 
     test "file creation", ctx do
-      [aggregate|_] = Comspec.Aggregate.aggregate_annotations(ctx[:comspec])
+      [aggregate | _] = Comspec.Aggregate.aggregate_annotations(ctx[:comspec])
       paths = aggregate.templates
 
       refute File.exists?(paths.lib.dst)
       refute File.exists?(paths.test.dst)
       run = fn -> Comspec.Aggregate.build_aggregates(ctx[:comspec]) end
-      run.()
-      # capture_io(run)
+      # run.()
+      capture_io(run)
       assert File.exists?(paths.lib.dst)
       assert File.exists?(paths.test.dst)
     end
