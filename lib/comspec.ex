@@ -60,7 +60,7 @@ defmodule Comspec do
   Returns the directory name for a comspec.
   """
   def dirname(comspec, type \\ "lib") do
-    res_dir = name(comspec) |> Mix.Comgen.snake()
+    res_dir = comspec |> name() |> Mix.Comgen.snake()
     app_dir = Mix.Comgen.app() |> to_string()
     "#{basedir()}#{type}/#{app_dir}/#{res_dir}"
   end

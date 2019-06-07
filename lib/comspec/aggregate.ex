@@ -20,7 +20,8 @@ defmodule Comspec.Aggregate do
   Build the directories, code and test cases for Aggregates
   """
   def build_aggregates(comspec) do
-    aggregate_directories(comspec)
+    comspec
+    |> aggregate_directories()
     |> Enum.each(&Mix.Comgen.gen_dir(&1))
 
     %ComspecToken{comspec: comspec}
@@ -40,7 +41,7 @@ defmodule Comspec.Aggregate do
   Add filedata to ComspecToken
   """
   def aggregate_filedata(%ComspecToken{} = token) do
-    name = Comspec.name(token.comspec) |> Mix.Comgen.snake()
+    name = token.comspec |> Comspec.name() |> Mix.Comgen.snake()
 
     data =
       token.comspec.aggregates

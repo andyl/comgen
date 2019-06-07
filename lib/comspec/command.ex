@@ -18,7 +18,8 @@ defmodule Comspec.Command do
   Build the directories, code and test cases for Commands
   """
   def build_commands(comspec) do
-    command_directories(comspec)
+    comspec
+    |> command_directories()
     |> Enum.each(&Mix.Comgen.gen_dir(&1))
 
     %ComspecToken{comspec: comspec}
@@ -38,7 +39,7 @@ defmodule Comspec.Command do
   Add filedata to ComspecToken
   """
   def command_filedata(%ComspecToken{} = token) do
-    name = Comspec.name(token.comspec) |> Mix.Comgen.snake()
+    name = token.comspec |> Comspec.name() |> Mix.Comgen.snake()
 
     data =
       token.comspec.commands

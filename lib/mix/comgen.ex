@@ -48,7 +48,8 @@ defmodule Mix.Comgen do
       vertical_symbol: "#"
     ]
 
-    TableRex.Table.new(ComspecConfig.help_table_data())
+    ComspecConfig.help_table_data()
+    |> TableRex.Table.new()
     |> TableRex.Table.render!(render_opts)
     |> String.replace(~r/^# /, "")
     |> String.replace(~r/ #$/, "")

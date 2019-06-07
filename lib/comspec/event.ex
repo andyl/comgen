@@ -39,7 +39,7 @@ defmodule Comspec.Event do
   Add filedata to ComspecToken
   """
   def event_filedata(%ComspecToken{} = token) do
-    name = Comspec.name(token.comspec) |> Mix.Comgen.snake()
+    name = token.comspec |> Comspec.name() |> Mix.Comgen.snake()
     data =
       token.comspec.events
       |> Enum.map(&Map.put(&1, :templates, template_paths(token.comspec, &1)))
