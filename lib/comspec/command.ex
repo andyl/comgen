@@ -21,8 +21,9 @@ defmodule Comspec.Command do
     command_directories(comspec)
     |> Enum.each(&Mix.Comgen.gen_dir(&1))
 
-    command_annotations(comspec)
-    |> Enum.each(&generate_command_files(comspec, &1))
+    %ComspecToken{comspec: comspec}
+    |> command_filedata()
+    |> generate_command_files()
   end
 
   @doc """
@@ -34,18 +35,32 @@ defmodule Comspec.Command do
   end
 
   @doc """
-  Add path data for template input/output files to each command.
+  Add filedata to ComspecToken
   """
-  def command_annotations(comspec) do
-    comspec.commands
-    |> Enum.map(&Map.put(&1, :templates, template_paths(comspec, &1)))
-    |> Enum.map(&Map.put(&1, :snake_name, Mix.Comgen.snake(&1.name)))
-    |> Enum.map(&Map.put(&1, :module_long, module_long(comspec, &1, @modtype)))
-    |> Enum.map(&Map.put(&1, :module_short, module_short(&1)))
-    |> Enum.map(&Map.put(&1, :string_fields, string_fields(&1)))
+  def command_filedata(%ComspecToken{} = token) do
+    name = Comspec.name(token.comspec) |> Mix.Comgen.snake()
+
+    data =
+      token.comspec.commands
+      |> Enum.map(&Map.put(&1, :templates, template_paths(token.comspec, &1)))
+      |> Enum.map(&Map.put(&1, :snake_name, name))
+      |> Enum.map(&Map.put(&1, :module_long, module_long(token.comspec, &1, @modtype)))
+      |> Enum.map(&Map.put(&1, :module_short, module_short(&1)))
+      |> Enum.map(&Map.put(&1, :string_fields, string_fields(&1)))
+
+    %ComspecToken{token | filedata: data}
+  end
+
+  def command_filedata(%{} = comspec) do
+    command_filedata(%ComspecToken{comspec: comspec})
   end
 
   # --------------------------------------------------------- 
+
+  defp generate_command_files(%ComspecToken{} = token) do
+    token.filedata
+    |> Enum.each(&generate_command_files(token.comspec, &1))
+  end
 
   defp generate_command_files(comspec, command) do
     generate_files(comspec, command)

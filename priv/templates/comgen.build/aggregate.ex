@@ -1,9 +1,9 @@
-# <%= submodule.templates.lib.dst %>
+# <%= filedata.templates.lib.dst %>
 
-defmodule <%= submodule.module_long %> do
-  defstruct [<%= submodule.string_fields %>
+defmodule <%= filedata.module_long %> do
+  defstruct [<%= filedata.string_fields %>
 
-  alias <%= submodule.module_long %>
+  alias <%= filedata.module_long %>
   # alias BankAPI.Accounts.Commands.OpenAccount
   # alias BankAPI.Accounts.Events.AccountOpened
 

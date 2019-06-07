@@ -23,8 +23,9 @@ defmodule Comspec.Aggregate do
     aggregate_directories(comspec)
     |> Enum.each(&Mix.Comgen.gen_dir(&1))
 
-    aggregate_annotations(comspec)
-    |> Enum.each(&generate_aggregate_files(comspec, &1))
+    %ComspecToken{comspec: comspec}
+    |> aggregate_filedata()
+    |> generate_aggregate_files()
   end
 
   @doc """
@@ -36,19 +37,36 @@ defmodule Comspec.Aggregate do
   end
 
   @doc """
-  Add path data for template input/output files to each aggregate.
+  Add filedata to ComspecToken
   """
-  def aggregate_annotations(comspec) do
-    comspec.aggregates
-    |> Enum.map(&Map.put(&1, :templates, template_paths(comspec, &1)))
-    |> Enum.map(&Map.put(&1, :snake_name, Mix.Comgen.snake(&1.name)))
-    |> Enum.map(&Map.put(&1, :module_long, module_long(comspec, &1, @modtype)))
-    |> Enum.map(&Map.put(&1, :module_short, module_short(&1)))
-    |> Enum.map(&Map.put(&1, :string_fields, string_fields(&1)))
-    |> (&(%{aggregates: &1})).()
+  def aggregate_filedata(%ComspecToken{} = token) do
+    name = Comspec.name(token.comspec) |> Mix.Comgen.snake()
+
+    data =
+      token.comspec.aggregates
+      |> Enum.map(&Map.put(&1, :templates, template_paths(token.comspec, &1)))
+      |> Enum.map(&Map.put(&1, :snake_name, name))
+      |> Enum.map(&Map.put(&1, :module_long, module_long(token.comspec, &1, @modtype)))
+      |> Enum.map(&Map.put(&1, :module_short, module_short(&1)))
+      |> Enum.map(&Map.put(&1, :string_fields, string_fields(&1)))
+
+    %ComspecToken{token | filedata: data}
+  end
+
+  def aggregate_filedata(%{} = comspec) do
+    aggregate_filedata(%ComspecToken{comspec: comspec})
   end
 
   # --------------------------------------------------------- 
+
+  defp generate_aggregate_files(%ComspecToken{} = token) do
+    token.filedata
+    |> Enum.each(&generate_aggregate_files(token.comspec, &1))
+  end
+
+  defp generate_aggregate_files(comspec, aggregate) do
+    generate_files(comspec, aggregate)
+  end
 
   defp template_paths(comspec, aggregate) do
     ev_name = Mix.Comgen.snake(aggregate[:name])
@@ -63,9 +81,5 @@ defmodule Comspec.Aggregate do
         dst: dirname(comspec, "test", @dirtype) <> "/" <> ev_name <> "_test.exs"
       }
     }
-  end
-
-  defp generate_aggregate_files(comspec, annotation) do
-    generate_files(comspec, annotation)
   end
 end

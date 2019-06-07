@@ -1,4 +1,4 @@
 defmodule ComspecToken do
-  defstruct [:comspec, :filepaths, :annotations]
+  defstruct [:comspec, :filedata, :annotations]
   
 end
