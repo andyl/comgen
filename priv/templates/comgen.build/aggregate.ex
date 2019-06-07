@@ -1,15 +1,14 @@
 # <%= submodule.templates.lib.dst %>
 
 defmodule <%= submodule.module_long %> do
-  defstruct [:uuid, :current_balance]
+  defstruct [<%= submodule.string_fields %>
 
-  # defstruct uuid: nil,
-  #           current_balance: nil
-  #
-  # alias __MODULE__
+  alias <%= submodule.module_long %>
   # alias BankAPI.Accounts.Commands.OpenAccount
   # alias BankAPI.Accounts.Events.AccountOpened
-  #
+
+  # ----- PUBLIC COMMAND API
+    
   # def execute(
   #       %Account{uuid: nil},
   #       %OpenAccount{
@@ -23,7 +22,7 @@ defmodule <%= submodule.module_long %> do
   #     initial_balance: initial_balance
   #   }
   # end
-  #
+  
   # def execute(
   #       %Account{uuid: nil},
   #       %OpenAccount{
@@ -33,13 +32,13 @@ defmodule <%= submodule.module_long %> do
   #     when initial_balance <= 0 do
   #   {:error, :initial_balance_must_be_above_zero}
   # end
-  #
+  
   # def execute(%Account{}, %OpenAccount{}) do
   #   {:error, :account_already_opened}
   # end
-  #
-  # # state mutators
-  #
+  
+  # ----- STATE MUTATORS
+  
   # def apply(
   #       %Account{} = account,
   #       %AccountOpened{

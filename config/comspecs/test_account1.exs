@@ -9,7 +9,7 @@ config :comgen, Account1,
   spec_run_after: nil,
   # specification
   aggregates: [
-    %{name: "Account", fields: [:uuid, :current_balance]}
+    %{name: "Account", fields: [:account_number, :balance]}
   ],
   commands: [
     %{name: "OpenAccount", fields: [:account_number, :initial_balance]},

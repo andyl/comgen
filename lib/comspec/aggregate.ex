@@ -45,6 +45,7 @@ defmodule Comspec.Aggregate do
     |> Enum.map(&Map.put(&1, :module_long, module_long(comspec, &1, @modtype)))
     |> Enum.map(&Map.put(&1, :module_short, module_short(&1)))
     |> Enum.map(&Map.put(&1, :string_fields, string_fields(&1)))
+    |> (&(%{aggregates: &1})).()
   end
 
   # --------------------------------------------------------- 
@@ -64,7 +65,7 @@ defmodule Comspec.Aggregate do
     }
   end
 
-  defp generate_aggregate_files(comspec, aggregate) do
-    generate_submodule_files(comspec, aggregate)
+  defp generate_aggregate_files(comspec, annotation) do
+    generate_files(comspec, annotation)
   end
 end

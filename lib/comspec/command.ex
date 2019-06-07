@@ -48,7 +48,7 @@ defmodule Comspec.Command do
   # --------------------------------------------------------- 
 
   defp generate_command_files(comspec, command) do
-    generate_submodule_files(comspec, command)
+    generate_files(comspec, command)
   end
 
   defp template_paths(comspec, command) do

@@ -21,7 +21,9 @@ defmodule Comspec.Event do
     event_directories(comspec)
     |> Enum.each(&Mix.Comgen.gen_dir(&1))
 
-    event_annotations(comspec)
+    {comspec, %{}}
+    |> template_annotations()
+    |> event_annotations()
     |> Enum.each(&generate_event_files(comspec, &1))
   end
 
@@ -48,7 +50,7 @@ defmodule Comspec.Event do
   # --------------------------------------------------------- 
   
   defp generate_event_files(comspec, event) do
-    generate_submodule_files(comspec, event)
+    generate_files(comspec, event)
   end
 
   defp template_paths(comspec, event) do

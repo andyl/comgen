@@ -43,6 +43,6 @@ defmodule Mix.Tasks.Comgen.Show do
 
   defp show(name, _, _) do
     ComspecConfig.kw_data(name)
-    |> IO.inspect()
+    |> IO.puts()
   end
 end
