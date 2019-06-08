@@ -26,6 +26,7 @@ defmodule Comspec.Aggregate do
 
     %ComspecToken{comspec: comspec}
     |> aggregate_filedata()
+    |> aggregate_annotations()
     |> generate_aggregate_files()
   end
 
@@ -50,6 +51,7 @@ defmodule Comspec.Aggregate do
       |> Enum.map(&Map.put(&1, :module_long, module_long(token.comspec, &1, @modtype)))
       |> Enum.map(&Map.put(&1, :module_short, module_short(&1)))
       |> Enum.map(&Map.put(&1, :string_fields, string_fields(&1)))
+      |> Enum.map(&Map.put(&1, :api, &1.api))
 
     %ComspecToken{token | filedata: data}
   end
@@ -58,15 +60,41 @@ defmodule Comspec.Aggregate do
     aggregate_filedata(%ComspecToken{comspec: comspec})
   end
 
+  @doc """
+  Add annotation data to the ComspecToken:
+  - list of all Command modules
+  - list of all Event modules
+  """
+  def aggregate_annotations(%ComspecToken{} = token) do
+    event_data =
+      token.comspec.events
+      |> Enum.map(&Map.put(&1, :module_long, module_long(token.comspec, &1, "Events")))
+
+    command_data =
+      token.comspec.commands
+      |> Enum.map(&Map.put(&1, :module_long, module_long(token.comspec, &1, "Commands")))
+
+    annotation_data = %{
+      events: event_data,
+      commands: command_data
+    }
+
+    %ComspecToken{token | annotations: annotation_data}
+  end
+
+  def aggregate_annotations(%{} = comspec) do
+    aggregate_annotations(%ComspecToken{comspec: comspec})
+  end
+
   # --------------------------------------------------------- 
 
   defp generate_aggregate_files(%ComspecToken{} = token) do
     token.filedata
-    |> Enum.each(&generate_aggregate_files(token.comspec, &1))
+    |> Enum.each(&generate_aggregate_files(token.comspec, &1, token.annotations))
   end
 
-  defp generate_aggregate_files(comspec, aggregate) do
-    generate_files(comspec, aggregate)
+  defp generate_aggregate_files(comspec, aggregate, annotations) do
+    generate_files(comspec, aggregate, annotations)
   end
 
   defp template_paths(comspec, aggregate) do

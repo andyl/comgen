@@ -35,6 +35,12 @@ defmodule Comspec.AggregateTest do
     end
   end
 
+  describe "#aggregate_annotations" do
+    test "runs w/o exception", ctx do
+      assert %{} = Comspec.Aggregate.aggregate_annotations(ctx[:comspec]).annotations
+    end
+  end
+
   describe "#build_aggregates" do
     setup [:reset_base_dir]
 

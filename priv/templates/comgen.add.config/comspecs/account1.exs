@@ -11,7 +11,32 @@ config :comgen, Account1,
   spec_run_after: nil,
   # specification
   aggregates: [
-    %{name: "Account", fields: [:uuid, :current_balance]}
+    %{
+      name: "Account", 
+      fields: [:uuid, :current_balance],
+      api: %{
+        "OpenAccount" => %{
+          cmd_params: "",
+          ev_name: "AccountOpened",
+          ev_params: ""
+        },
+        "CloseAccount" => %{
+          cmd_params: "",
+          ev_name: "AccountClosed",
+          ev_params: ""
+        },
+        "CreditAccount" => %{
+          cmd_params: "",
+          ev_name: "AccountCredited",
+          ev_params: ""
+        },
+        "DebitAccount" => %{
+        cmd_params: "",
+        ev_name: "AccountDebited",
+        ev_params: ""
+        },
+      },
+    },
   ],
   commands: [
     %{name: "OpenAccount", fields: [:account_number, :initial_balance]},
@@ -34,31 +59,3 @@ config :comgen, Account1,
   read_schemas: nil,
   read_queries: nil
 
-#   Accounts: %{
-#     aggregate: %{
-#       BankAccount: %{
-#         fields: [:account_number, :balance]
-#       }
-#     },
-#     command: %{
-#       OpenAccount: %{
-#         fields: [:account_number, :initial_balance],
-#         key_field: :account_number
-#       }
-#     },
-#     command_handler: ["NoOpMiddleware"],
-#     command_router: ["BankRouter"],
-#     event_projector: ["ExampleProjector"],
-#     read: %{
-#       fields: ~w(name:string balance:integer)
-#     },
-#     saga: %{
-#       TransferMoneyProcessManager: %{
-#         fields: [:transfer_uuid, :debit_account, :credit_account, :amount, :status]
-#       }
-#     }
-#   }
-#   }
-# }
-#
-# config :commanded, comspec: comspec
