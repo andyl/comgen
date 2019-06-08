@@ -2,8 +2,11 @@
 
 ## [Unreleased]
 
-- Add API module with command functions
 - Add tests to drive end-to-end from command to event-store
+
+## [0.0.5] - 2019-06-08
+
+- Generate aggregate functions for API and Mutators
 
 ## [0.0.4] - 2019-06-05
 
