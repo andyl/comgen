@@ -12,31 +12,35 @@ config :comgen, Account1,
   # specification
   aggregates: [
     %{
-      name: "Account", 
-      fields: [:uuid, :current_balance],
-      api: %{
-        "OpenAccount" => %{
-          cmd_params: "",
+      name: "Account",
+      fields: [:uuid, :balance],
+      api: [
+        %{
+          cmd_name: "OpenAccount",
+          cmd_params: "uuid: uuid, balance: balance",
           ev_name: "AccountOpened",
-          ev_params: ""
+          ev_params: "uuid: uuid, balance: balance"
         },
-        "CloseAccount" => %{
-          cmd_params: "",
+        %{
+          cmd_name: "CloseAccount",
+          cmd_params: "uuid: uuid, balance: balance",
           ev_name: "AccountClosed",
-          ev_params: ""
+          ev_params: "uuid: uuid, balance: balance"
         },
-        "CreditAccount" => %{
+        %{
+          cmd_name: "CreditAccount",
           cmd_params: "",
           ev_name: "AccountCredited",
           ev_params: ""
         },
-        "DebitAccount" => %{
-        cmd_params: "",
-        ev_name: "AccountDebited",
-        ev_params: ""
-        },
-      },
-    },
+        %{
+          cmd_name: "DebitAccount",
+          cmd_params: "",
+          ev_name: "AccountDebited",
+          ev_params: ""
+        }
+      ]
+    }
   ],
   commands: [
     %{name: "OpenAccount", fields: [:account_number, :initial_balance]},
@@ -58,4 +62,3 @@ config :comgen, Account1,
   process_managers: nil,
   read_schemas: nil,
   read_queries: nil
-
