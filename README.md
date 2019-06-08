@@ -32,7 +32,7 @@ $ mix phx.new my_app --no-html --no-webpack
 $ cd my_app
 ```
 
-Then install this package by adding `phoenix_commanded` to your list of
+Then install this package by adding `comgen` to your list of
 dependencies in `my_app/mix.exs`:
 
 ```elixir

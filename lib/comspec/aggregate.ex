@@ -1,6 +1,6 @@
 defmodule Comspec.Aggregate do
   @moduledoc """
-  A struct to handle an Aggregate and generate Aggregate Resources.
+  A struct to handle an Aggregate and generate Aggregate Resources. 
   """
 
   @dirtype "aggregates"

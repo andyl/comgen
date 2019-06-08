@@ -42,8 +42,18 @@ defmodule Mix.Tasks.Comgen.Show do
   end
 
   defp show(name, _, _) do
+    colors = [
+      number: :red,
+      atom: :cyan,
+      regex: :green,
+      tuple: :cyan,
+      map: :yellow,
+      list: :magenta
+    ]
+
     name
     |> ComspecConfig.kw_data()
+    |> inspect(pretty: true, syntax_colors: colors)
     |> IO.puts()
   end
 end

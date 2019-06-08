@@ -1,6 +1,6 @@
 defmodule ComspecToken do
   @moduledoc """
-  A data-structure containing information needed by code generators.
+  A struct with context data used by EEx code generators.
   """
   defstruct [:comspec, :filedata, :annotations]
   
