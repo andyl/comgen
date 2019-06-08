@@ -19,7 +19,8 @@ defmodule ComspecConfig do
   The comspecs are defined in `config/comspecs/*.exs`.
   """
   def keys do
-    Application.get_all_env(mix_app())
+    mix_app()
+    |> Application.get_all_env()
     |> Keyword.keys()
     |> Enum.sort()
   end
@@ -37,7 +38,7 @@ defmodule ComspecConfig do
   Key in keys?
   """
   def valid_key?(key) do
-    skey = to_string(key) |> String.replace(~r/Elixir./, "")
+    skey = key |> to_string() |> String.replace(~r/Elixir./, "") 
     Enum.any?(string_keys(), &(&1 == skey))
   end
 
@@ -67,9 +68,10 @@ defmodule ComspecConfig do
   The comspecs are defined in `config/comspecs/*.exs`.
   """
   def struct_data!(key) do
-    skey = to_string(key)
-    kw_data(skey)
-    |> Enum.reduce(%Comspec{}, fn({key, val}, acc) -> Map.put(acc, key, val) end)
+    key
+    |> to_string()
+    |> kw_data()
+    |> Enum.reduce(%Comspec{}, fn {key, val}, acc -> Map.put(acc, key, val) end)
     |> Map.put(:spec_key, key)
   end
 

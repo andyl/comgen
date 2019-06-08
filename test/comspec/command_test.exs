@@ -16,13 +16,13 @@ defmodule Comspec.CommandTest do
     end
   end
 
-  describe "#command_annotations" do
+  describe "#command_filedata" do
     test "runs w/o exception", ctx do
-      assert [_ | _] = Comspec.Command.command_annotations(ctx[:comspec])
+      assert Comspec.Command.command_filedata(ctx[:comspec]).filedata
     end
 
     test "contains command elements", ctx do
-      [head | _] = Comspec.Command.command_annotations(ctx[:comspec])
+      [head | _] = Comspec.Command.command_filedata(ctx[:comspec]).filedata
       assert head[:name]
       assert head[:fields]
       assert head[:templates]
@@ -53,7 +53,7 @@ defmodule Comspec.CommandTest do
     end
 
     test "file creation", ctx do
-      [command|_] = Comspec.Command.command_annotations(ctx[:comspec])
+      [command|_] = Comspec.Command.command_filedata(ctx[:comspec]).filedata
       paths = command.templates
 
       refute File.exists?(paths.lib.dst)
@@ -64,5 +64,6 @@ defmodule Comspec.CommandTest do
       assert File.exists?(paths.lib.dst)
       assert File.exists?(paths.test.dst)
     end
+
   end
 end

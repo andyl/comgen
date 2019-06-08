@@ -1,6 +1,6 @@
-# <%= submodule.templates.lib.dst %>
-defmodule <%= submodule.module_long %> do
+# <%= filedata.templates.lib.dst %>
+defmodule <%= filedata.module_long %> do
   @derive Jason.Encoder
 
-  defstruct [<%= submodule.string_fields %>] 
+  defstruct [<%= filedata.string_fields %>] 
 end

@@ -1,11 +1,11 @@
-# <%= submodule.templates.test.dst%>
-defmodule <%= submodule.module_long %>Test do
+# <%= filedata.templates.test.dst%>
+defmodule <%= filedata.module_long %>Test do
   use ExUnit.Case
-  alias <%= submodule.module_long %>
+  alias <%= filedata.module_long %>
 
-  describe "<%= submodule.module_short %> struct" do
+  describe "<%= filedata.module_short %> struct" do
     test "creates an empty struct" do
-      assert %<%= submodule.module_short %>{}
+      assert %<%= filedata.module_short %>{}
     end
   end
 end

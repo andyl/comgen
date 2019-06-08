@@ -16,13 +16,13 @@ defmodule Comspec.EventTest do
     end
   end
 
-  describe "#event_annotations" do
+  describe "#event_filedata" do
     test "runs w/o exception", ctx do
-      assert [_ | _] = Comspec.Event.event_annotations(ctx[:comspec])
+      assert Comspec.Event.event_filedata(ctx[:comspec])
     end
 
     test "contains event elements", ctx do
-      [head | _] = Comspec.Event.event_annotations(ctx[:comspec])
+      [head | _] = Comspec.Event.event_filedata(ctx[:comspec]).filedata
       assert head[:name]
       assert head[:fields]
       assert head[:templates]
@@ -53,7 +53,7 @@ defmodule Comspec.EventTest do
     end
 
     test "file creation", ctx do
-      [event|_] = Comspec.Event.event_annotations(ctx[:comspec])
+      [event|_] = Comspec.Event.event_filedata(ctx[:comspec]).filedata
       paths = event.templates
 
       refute File.exists?(paths.lib.dst)

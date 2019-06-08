@@ -16,13 +16,13 @@ defmodule Comspec.AggregateTest do
     end
   end
 
-  describe "#aggregate_annotations" do
+  describe "#aggregate_filedata" do
     test "runs w/o exception", ctx do
-      assert [_ | _] = Comspec.Aggregate.aggregate_annotations(ctx[:comspec])
+      assert [_ | _] = Comspec.Aggregate.aggregate_filedata(ctx[:comspec]).filedata
     end
 
     test "contains aggregate elements", ctx do
-      [head | _] = Comspec.Aggregate.aggregate_annotations(ctx[:comspec])
+      [head | _] = Comspec.Aggregate.aggregate_filedata(ctx[:comspec]).filedata
       assert head[:name]
       assert head[:fields]
       assert head[:templates]
@@ -32,6 +32,12 @@ defmodule Comspec.AggregateTest do
       assert head[:templates][:test]
       assert head[:templates][:test][:src]
       assert head[:templates][:test][:dst]
+    end
+  end
+
+  describe "#aggregate_annotations" do
+    test "runs w/o exception", ctx do
+      assert %{} = Comspec.Aggregate.aggregate_annotations(ctx[:comspec]).annotations
     end
   end
 
@@ -54,13 +60,12 @@ defmodule Comspec.AggregateTest do
     end
 
     test "file creation", ctx do
-      [aggregate | _] = Comspec.Aggregate.aggregate_annotations(ctx[:comspec])
+      [aggregate | _] = Comspec.Aggregate.aggregate_filedata(ctx[:comspec]).filedata
       paths = aggregate.templates
 
       refute File.exists?(paths.lib.dst)
       refute File.exists?(paths.test.dst)
       run = fn -> Comspec.Aggregate.build_aggregates(ctx[:comspec]) end
-      # run.()
       capture_io(run)
       assert File.exists?(paths.lib.dst)
       assert File.exists?(paths.test.dst)

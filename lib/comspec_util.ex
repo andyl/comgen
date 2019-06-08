@@ -31,9 +31,9 @@ defmodule ComspecUtil do
     submodule.name
   end
 
-  def generate_submodule_files(comspec, submodule) do
-    context = [comspec: comspec, submodule: submodule]
-    paths = submodule[:templates]
+  def generate_files(comspec, filedata, annotations \\ nil) do
+    context = [comspec: comspec, filedata: filedata, annotations: annotations]
+    paths = filedata[:templates]
 
     Mix.Comgen.gen_file(paths.lib.src, paths.lib.dst, context)
     Mix.Comgen.gen_file(paths.test.src, paths.test.dst, context)
