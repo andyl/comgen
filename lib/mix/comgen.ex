@@ -58,7 +58,12 @@ defmodule Mix.Comgen do
 
   @doc """
   Convert string to snake-case.
+
+      iex> Mix.Comgen.snake("HelloWorld")
+      "hello_world"
+
   """
+  @spec snake(String.t) :: String.t
   def snake(string) do
     Macro.underscore(string)
   end

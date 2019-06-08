@@ -3,6 +3,8 @@ defmodule Mix.ComgenTest do
   import TestHelper
   import ExUnit.CaptureIO
 
+  doctest Mix.Comgen
+
   describe "#app" do
     test "returns a string" do
       assert Mix.Comgen.app()

@@ -38,6 +38,7 @@ defmodule PhoenixCommanded.MixProject do
       version: version(),
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
+      aliases: aliases(),
       deps: deps(),
       docs: docs()
     ]
@@ -59,6 +60,12 @@ defmodule PhoenixCommanded.MixProject do
         "README.md",
         "guides/roadmap.md"
       ]
+    ]
+  end
+
+  defp aliases do
+    [
+      docs: "docs --source-url https://github.com/andyl/comgen",
     ]
   end
 end
